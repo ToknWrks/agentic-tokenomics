@@ -73,12 +73,18 @@ For each fee-generating transaction:
 
   fee_amount = max(transaction_value * fee_rate[transaction_type], min_fee)
 
-  burn_pool       += fee_amount * burn_share
-  validator_fund  += fee_amount * validator_share
-  community_pool  += fee_amount * community_share
-  agent_infra     += fee_amount * agent_share
+  burn_pool       += floor(fee_amount * burn_share)
+  community_pool  += floor(fee_amount * community_share)
+  agent_infra     += floor(fee_amount * agent_share)
+  validator_fund  += fee_amount - burn_pool_share - community_pool_share - agent_infra_share
 
   where burn_share + validator_share + community_share + agent_share = 1.0
+
+  NOTE: Integer rounding strategy — three pools are computed with floor(),
+  and the validator fund receives the remainder. This ensures
+  fee_collected = sum(pool_distributions) (Fee Conservation invariant)
+  with no dust loss. The validator pool absorbs at most 3 uregen of
+  rounding surplus per transaction.
 ```
 
 ### Distribution Parameters

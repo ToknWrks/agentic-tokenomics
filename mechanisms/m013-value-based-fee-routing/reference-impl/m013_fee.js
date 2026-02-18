@@ -54,11 +54,17 @@ export function computeFee({ tx_type, value, fee_config }) {
   const minFeeApplied = rawFee < minFee;
   const feeAmount = Math.max(rawFee, minFee);
 
+  // Floor 3 pools, derive validator as remainder to preserve Fee Conservation invariant
+  const d_burn = Math.floor(feeAmount * shares.burn);
+  const d_community = Math.floor(feeAmount * shares.community);
+  const d_agent = Math.floor(feeAmount * shares.agent);
+  const d_validator = feeAmount - d_burn - d_community - d_agent;
+
   const distribution = {
-    burn: Math.floor(feeAmount * shares.burn),
-    validator: Math.floor(feeAmount * shares.validator),
-    community: Math.floor(feeAmount * shares.community),
-    agent: Math.floor(feeAmount * shares.agent)
+    burn: d_burn,
+    validator: d_validator,
+    community: d_community,
+    agent: d_agent
   };
 
   return {
