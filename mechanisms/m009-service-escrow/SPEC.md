@@ -96,8 +96,8 @@ Confidence reflects data availability across four boolean signals:
 | Condition | Recommendation |
 |-----------|---------------|
 | `score >= 700 AND confidence >= 750` | APPROVE |
-| `score >= 400 AND score < 700` | NEEDS_REVISION |
 | `score < 400 OR confidence < 250` | FLAG_FOR_CLIENT |
+| Otherwise | NEEDS_REVISION |
 
 ---
 
@@ -173,9 +173,16 @@ Escrow Contract ──(cancellation_fee)──→ Community Pool  (fee = 2% of e
 
 | Outcome | Client receives | Provider receives | Community pool |
 |---------|----------------|-------------------|----------------|
-| **CLIENT_WINS** | remaining escrow − arbiter_fee | 0 (bond slashed: 50% client, 50% pool) | 50% of bond + arbiter_fee |
-| **PROVIDER_WINS** | 0 | remaining escrow + bond − arbiter_fee | arbiter_fee |
-| **SPLIT(X%)** | X% of remaining − arbiter_fee share | (100−X)% of remaining + bond − arbiter_fee share | arbiter_fee |
+| **CLIENT_WINS** | disputed_milestone_amount − arbiter_fee | 0 (bond slashed: 50% client, 50% pool) | 50% of bond + arbiter_fee |
+| **PROVIDER_WINS** | 0 | disputed_milestone_amount + bond − arbiter_fee | arbiter_fee |
+| **SPLIT(X%)** | X% of disputed_milestone_amount − arbiter_fee share | (100−X)% of disputed_milestone_amount + bond − arbiter_fee share | arbiter_fee |
+
+> **NOTE**: "disputed_milestone_amount" refers to the payment allocated to the
+> disputed milestone only, NOT the entire remaining contract escrow. Funds for
+> future uncompleted milestones remain in escrow. If the agreement continues
+> after resolution (e.g., PROVIDER_WINS with remaining milestones), it
+> transitions back to IN_PROGRESS. If terminated, remaining escrow is returned
+> to the client minus any applicable fees.
 
 ### Governance parameters
 

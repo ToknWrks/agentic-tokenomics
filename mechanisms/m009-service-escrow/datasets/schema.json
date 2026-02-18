@@ -59,7 +59,7 @@
                   "enum": ["PENDING", "IN_PROGRESS", "SUBMITTED", "APPROVED", "DISPUTED", "REVISED"]
                 },
                 "deliverable_iri": { "type": ["string", "null"] },
-                "review_score": { "type": ["number", "null"] }
+                "review_score": { "type": ["integer", "null"] }
               }
             }
           },

@@ -118,12 +118,13 @@
           "review_score": null
         }
       ],
-      "status": "RESOLVED",
+      "status": "IN_PROGRESS",
       "created_at": "2025-10-20T11:00:00Z",
       "completed_at": null,
       "dispute": {
         "reason": "Calibration data shows sensor drift beyond acceptable tolerance",
-        "resolution": "PROVIDER_WINS"
+        "resolution": "PROVIDER_WINS",
+        "note": "Provider won dispute on milestone 1; agreement continues with remaining milestone 2"
       }
     },
     {

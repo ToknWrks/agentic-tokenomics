@@ -65,10 +65,10 @@ function computeRecommendation(score, confidence) {
 function computeConfidence(factors) {
   let available = 0;
   const total = 4;
-  if (factors.reputation_available) available++;
-  if (factors.iri_resolvable !== false) available++;
-  if (factors.has_prior_milestones) available++;
-  if (factors.spec_available !== false) available++;
+  if (factors.reputation_available === true) available++;
+  if (factors.iri_resolvable === true) available++;
+  if (factors.has_prior_milestones === true) available++;
+  if (factors.spec_available === true) available++;
   return Math.round((available / total) * 1000);
 }
 

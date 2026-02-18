@@ -40,7 +40,13 @@ export function computeM009KPI({ as_of, agreements }) {
   const total_slashed = slashed_escrows.reduce((s, e) => s + e, 0);
 
   // Platform fees: 1% of completed escrows + 2% of cancelled funded escrows
-  const cancelled_funded = agrs.filter(a => a.status === "CANCELLED" && a.escrow_amount)
+  // Only FUNDED cancellations incur fees; PROPOSED cancellations are fee-free.
+  // Use cancelled_from field if available; otherwise assume fee-incurring.
+  const cancelled_funded = agrs.filter(a =>
+      a.status === "CANCELLED" &&
+      a.escrow_amount &&
+      (a.cancelled_from ?? "FUNDED") !== "PROPOSED"
+    )
     .map(a => parseInt(a.escrow_amount?.amount ?? "0", 10));
   const completion_fees = Math.round(total_released * 0.01);
   const cancellation_fees = Math.round(cancelled_funded.reduce((s, e) => s + e, 0) * 0.02);
