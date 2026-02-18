@@ -1,0 +1,189 @@
+{
+  "mechanism_id": "m009",
+  "scope": "v0_advisory",
+  "as_of": "2026-02-18T12:00:00Z",
+  "agreements": [
+    {
+      "agreement_id": "agr-001",
+      "client": "regen1client01",
+      "provider": "regen1provider01",
+      "service_type": "ProjectVerification",
+      "escrow_amount": { "amount": "5000000", "denom": "uregen" },
+      "provider_bond": { "amount": "500000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Desktop review of project documentation",
+          "payment": { "amount": "1500000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/desktop-review-plot-42",
+          "review_score": 783
+        },
+        {
+          "index": 1,
+          "description": "Field visit and site inspection",
+          "payment": { "amount": "2000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/field-visit-report-plot-42",
+          "review_score": 770
+        },
+        {
+          "index": 2,
+          "description": "Final verification report",
+          "payment": { "amount": "1500000", "denom": "uregen" },
+          "status": "IN_PROGRESS",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "IN_PROGRESS",
+      "created_at": "2026-01-05T10:00:00Z",
+      "completed_at": null,
+      "dispute": null
+    },
+    {
+      "agreement_id": "agr-002",
+      "client": "regen1client02",
+      "provider": "regen1provider02",
+      "service_type": "MethodologyDevelopment",
+      "escrow_amount": { "amount": "25000000", "denom": "uregen" },
+      "provider_bond": { "amount": "2500000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Literature review and methodology framework",
+          "payment": { "amount": "5000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/methodology-framework-soil-v5",
+          "review_score": 820
+        },
+        {
+          "index": 1,
+          "description": "Draft methodology document",
+          "payment": { "amount": "8000000", "denom": "uregen" },
+          "status": "SUBMITTED",
+          "deliverable_iri": "koi://deliverable/methodology-draft-soil-carbon-v5",
+          "review_score": 550
+        },
+        {
+          "index": 2,
+          "description": "Peer review incorporation",
+          "payment": { "amount": "7000000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        },
+        {
+          "index": 3,
+          "description": "Final methodology and validation report",
+          "payment": { "amount": "5000000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "MILESTONE_REVIEW",
+      "created_at": "2025-11-15T09:00:00Z",
+      "completed_at": null,
+      "dispute": null
+    },
+    {
+      "agreement_id": "agr-003",
+      "client": "regen1client03",
+      "provider": "regen1provider03",
+      "service_type": "MRVSetup",
+      "escrow_amount": { "amount": "10000000", "denom": "uregen" },
+      "provider_bond": { "amount": "1000000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Sensor deployment plan",
+          "payment": { "amount": "3000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/mrv-sensor-deployment-plan",
+          "review_score": 903
+        },
+        {
+          "index": 1,
+          "description": "Sensor installation and calibration",
+          "payment": { "amount": "4000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/mrv-sensor-calibration-report",
+          "review_score": 880
+        },
+        {
+          "index": 2,
+          "description": "Data pipeline and dashboard setup",
+          "payment": { "amount": "3000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/mrv-dashboard-handoff",
+          "review_score": 910
+        }
+      ],
+      "status": "COMPLETED",
+      "created_at": "2025-10-01T08:00:00Z",
+      "completed_at": "2026-01-20T16:00:00Z",
+      "dispute": null
+    },
+    {
+      "agreement_id": "agr-004",
+      "client": "regen1client04",
+      "provider": "regen1provider04",
+      "service_type": "CreditIssuanceSupport",
+      "escrow_amount": { "amount": "3000000", "denom": "uregen" },
+      "provider_bond": { "amount": "300000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Credit batch preparation and documentation",
+          "payment": { "amount": "1500000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/credit-batch-docs-C04",
+          "review_score": 720
+        },
+        {
+          "index": 1,
+          "description": "Issuance execution and registry listing",
+          "payment": { "amount": "1500000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "CANCELLED",
+      "created_at": "2026-01-10T11:00:00Z",
+      "completed_at": null,
+      "dispute": null
+    },
+    {
+      "agreement_id": "agr-005",
+      "client": "regen1client05",
+      "provider": "regen1provider05",
+      "service_type": "MonitoringReporting",
+      "escrow_amount": { "amount": "1500000", "denom": "uregen" },
+      "provider_bond": { "amount": "150000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Quarterly monitoring report",
+          "payment": { "amount": "750000", "denom": "uregen" },
+          "status": "SUBMITTED",
+          "deliverable_iri": "koi://deliverable/monitoring-report-q4-2025",
+          "review_score": 265
+        },
+        {
+          "index": 1,
+          "description": "Annual summary report",
+          "payment": { "amount": "750000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "PROPOSED",
+      "created_at": "2026-02-10T14:00:00Z",
+      "completed_at": null,
+      "dispute": null
+    }
+  ]
+}

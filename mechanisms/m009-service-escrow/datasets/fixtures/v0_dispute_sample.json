@@ -1,0 +1,163 @@
+{
+  "mechanism_id": "m009",
+  "scope": "v0_advisory",
+  "as_of": "2026-02-18T12:00:00Z",
+  "agreements": [
+    {
+      "agreement_id": "agr-d01",
+      "client": "regen1clientd01",
+      "provider": "regen1providerd01",
+      "service_type": "ProjectVerification",
+      "escrow_amount": { "amount": "8000000", "denom": "uregen" },
+      "provider_bond": { "amount": "800000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Desktop review",
+          "payment": { "amount": "2000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/desktop-review-d01",
+          "review_score": 750
+        },
+        {
+          "index": 1,
+          "description": "Field visit report",
+          "payment": { "amount": "3000000", "denom": "uregen" },
+          "status": "DISPUTED",
+          "deliverable_iri": "koi://deliverable/field-visit-d01-incomplete",
+          "review_score": 320
+        },
+        {
+          "index": 2,
+          "description": "Final verification report",
+          "payment": { "amount": "3000000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "DISPUTED",
+      "created_at": "2025-11-01T10:00:00Z",
+      "completed_at": null,
+      "dispute": {
+        "reason": "Field visit report missing soil sample analysis required by methodology",
+        "resolution": null
+      }
+    },
+    {
+      "agreement_id": "agr-d02",
+      "client": "regen1clientd02",
+      "provider": "regen1providerd02",
+      "service_type": "MethodologyDevelopment",
+      "escrow_amount": { "amount": "30000000", "denom": "uregen" },
+      "provider_bond": { "amount": "3000000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Literature review",
+          "payment": { "amount": "6000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/lit-review-d02",
+          "review_score": 810
+        },
+        {
+          "index": 1,
+          "description": "Draft methodology",
+          "payment": { "amount": "12000000", "denom": "uregen" },
+          "status": "DISPUTED",
+          "deliverable_iri": "koi://deliverable/draft-methodology-d02-plagiarized",
+          "review_score": 180
+        },
+        {
+          "index": 2,
+          "description": "Final methodology",
+          "payment": { "amount": "12000000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "RESOLVED",
+      "created_at": "2025-09-15T09:00:00Z",
+      "completed_at": "2026-01-10T14:00:00Z",
+      "dispute": {
+        "reason": "Draft methodology contains plagiarized content from published methodology without attribution",
+        "resolution": "CLIENT_WINS"
+      }
+    },
+    {
+      "agreement_id": "agr-d03",
+      "client": "regen1clientd03",
+      "provider": "regen1providerd03",
+      "service_type": "MRVSetup",
+      "escrow_amount": { "amount": "15000000", "denom": "uregen" },
+      "provider_bond": { "amount": "1500000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Sensor deployment plan",
+          "payment": { "amount": "5000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/sensor-plan-d03",
+          "review_score": 870
+        },
+        {
+          "index": 1,
+          "description": "Installation and calibration",
+          "payment": { "amount": "5000000", "denom": "uregen" },
+          "status": "DISPUTED",
+          "deliverable_iri": "koi://deliverable/calibration-report-d03",
+          "review_score": 450
+        },
+        {
+          "index": 2,
+          "description": "Dashboard and handoff",
+          "payment": { "amount": "5000000", "denom": "uregen" },
+          "status": "PENDING",
+          "deliverable_iri": null,
+          "review_score": null
+        }
+      ],
+      "status": "RESOLVED",
+      "created_at": "2025-10-20T11:00:00Z",
+      "completed_at": null,
+      "dispute": {
+        "reason": "Calibration data shows sensor drift beyond acceptable tolerance",
+        "resolution": "PROVIDER_WINS"
+      }
+    },
+    {
+      "agreement_id": "agr-d04",
+      "client": "regen1clientd04",
+      "provider": "regen1providerd04",
+      "service_type": "CreditIssuanceSupport",
+      "escrow_amount": { "amount": "4000000", "denom": "uregen" },
+      "provider_bond": { "amount": "400000", "denom": "uregen" },
+      "milestones": [
+        {
+          "index": 0,
+          "description": "Credit documentation",
+          "payment": { "amount": "2000000", "denom": "uregen" },
+          "status": "APPROVED",
+          "deliverable_iri": "koi://deliverable/credit-docs-d04",
+          "review_score": 680
+        },
+        {
+          "index": 1,
+          "description": "Issuance execution",
+          "payment": { "amount": "2000000", "denom": "uregen" },
+          "status": "DISPUTED",
+          "deliverable_iri": "koi://deliverable/issuance-d04-partial",
+          "review_score": 400
+        }
+      ],
+      "status": "RESOLVED",
+      "created_at": "2025-12-01T08:00:00Z",
+      "completed_at": "2026-02-05T10:00:00Z",
+      "dispute": {
+        "reason": "Issuance only covered 60% of agreed credit batch scope",
+        "resolution": "SPLIT"
+      }
+    }
+  ]
+}

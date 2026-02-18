@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "m009_dataset_v0",
+  "title": "m009 replay dataset",
+  "description": "Replay dataset for m009 Service Provision Escrow — service agreement lifecycle records with milestones, escrow, and dispute data.",
+  "type": "object",
+  "required": ["mechanism_id", "scope", "as_of", "agreements"],
+  "properties": {
+    "mechanism_id": { "const": "m009" },
+    "scope": { "type": "string" },
+    "as_of": { "type": "string", "format": "date-time" },
+    "agreements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["agreement_id", "client", "provider", "service_type", "escrow_amount", "provider_bond", "milestones", "status"],
+        "properties": {
+          "agreement_id": { "type": "string" },
+          "client": { "type": "string" },
+          "provider": { "type": "string" },
+          "service_type": {
+            "type": "string",
+            "enum": ["ProjectVerification", "MethodologyDevelopment", "MRVSetup", "CreditIssuanceSupport", "MonitoringReporting"]
+          },
+          "escrow_amount": {
+            "type": "object",
+            "required": ["amount", "denom"],
+            "properties": {
+              "amount": { "type": "string" },
+              "denom": { "type": "string" }
+            }
+          },
+          "provider_bond": {
+            "type": "object",
+            "required": ["amount", "denom"],
+            "properties": {
+              "amount": { "type": "string" },
+              "denom": { "type": "string" }
+            }
+          },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["index", "description", "payment", "status"],
+              "properties": {
+                "index": { "type": "integer" },
+                "description": { "type": "string" },
+                "payment": {
+                  "type": "object",
+                  "required": ["amount", "denom"],
+                  "properties": {
+                    "amount": { "type": "string" },
+                    "denom": { "type": "string" }
+                  }
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["PENDING", "IN_PROGRESS", "SUBMITTED", "APPROVED", "DISPUTED", "REVISED"]
+                },
+                "deliverable_iri": { "type": ["string", "null"] },
+                "review_score": { "type": ["number", "null"] }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["PROPOSED", "FUNDED", "IN_PROGRESS", "MILESTONE_REVIEW", "COMPLETED", "DISPUTED", "RESOLVED", "CANCELLED"]
+          },
+          "created_at": { "type": "string", "format": "date-time" },
+          "completed_at": { "type": ["string", "null"], "format": "date-time" },
+          "dispute": {
+            "type": ["object", "null"],
+            "properties": {
+              "reason": { "type": "string" },
+              "resolution": { "type": ["string", "null"], "enum": ["CLIENT_WINS", "PROVIDER_WINS", "SPLIT", null] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "scores": [
+    {
+      "score": 783,
+      "confidence": 750,
+      "recommendation": "APPROVE",
+      "factors": {
+        "deliverable_quality": 800,
+        "evidence_completeness": 900,
+        "milestone_consistency": 700,
+        "provider_reputation": 650
+      }
+    },
+    {
+      "score": 770,
+      "confidence": 1000,
+      "recommendation": "APPROVE",
+      "factors": {
+        "deliverable_quality": 750,
+        "evidence_completeness": 850,
+        "milestone_consistency": 800,
+        "provider_reputation": 650
+      }
+    },
+    {
+      "score": 550,
+      "confidence": 750,
+      "recommendation": "NEEDS_REVISION",
+      "factors": {
+        "deliverable_quality": 500,
+        "evidence_completeness": 600,
+        "milestone_consistency": 400,
+        "provider_reputation": 800
+      }
+    },
+    {
+      "score": 903,
+      "confidence": 750,
+      "recommendation": "APPROVE",
+      "factors": {
+        "deliverable_quality": 900,
+        "evidence_completeness": 950,
+        "milestone_consistency": 850,
+        "provider_reputation": 900
+      }
+    },
+    {
+      "score": 265,
+      "confidence": 250,
+      "recommendation": "FLAG_FOR_CLIENT",
+      "factors": {
+        "deliverable_quality": 300,
+        "evidence_completeness": 200,
+        "milestone_consistency": 250,
+        "provider_reputation": 300
+      }
+    }
+  ]
+}
