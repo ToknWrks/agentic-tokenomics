@@ -1,0 +1,80 @@
+{
+  "fee_results": [
+    {
+      "tx_hash": "tx_issuance_001",
+      "fee_amount_uregen": 100000000,
+      "min_fee_applied": false,
+      "distribution": {
+        "burn": 30000000,
+        "validator": 40000000,
+        "community": 25000000,
+        "agent": 5000000
+      }
+    },
+    {
+      "tx_hash": "tx_transfer_001",
+      "fee_amount_uregen": 1000000,
+      "min_fee_applied": true,
+      "distribution": {
+        "burn": 300000,
+        "validator": 400000,
+        "community": 250000,
+        "agent": 50000
+      }
+    },
+    {
+      "tx_hash": "tx_retire_001",
+      "fee_amount_uregen": 5000000,
+      "min_fee_applied": false,
+      "distribution": {
+        "burn": 1500000,
+        "validator": 2000000,
+        "community": 1250000,
+        "agent": 250000
+      }
+    },
+    {
+      "tx_hash": "tx_market_001",
+      "fee_amount_uregen": 25000000,
+      "min_fee_applied": false,
+      "distribution": {
+        "burn": 7500000,
+        "validator": 10000000,
+        "community": 6250000,
+        "agent": 1250000
+      }
+    },
+    {
+      "tx_hash": "tx_transfer_002",
+      "fee_amount_uregen": 1000000,
+      "min_fee_applied": true,
+      "distribution": {
+        "burn": 300000,
+        "validator": 400000,
+        "community": 250000,
+        "agent": 50000
+      }
+    }
+  ],
+  "kpi": {
+    "mechanism_id": "m013",
+    "scope": "v0",
+    "as_of": "2026-02-18T12:00:00Z",
+    "total_fees_uregen": 132000000,
+    "fee_events_count": 5,
+    "fees_by_type": {
+      "CreditIssuance": 100000000,
+      "CreditTransfer": 2000000,
+      "CreditRetirement": 5000000,
+      "MarketplaceTrade": 25000000
+    },
+    "distribution_by_pool": {
+      "burn": 39600000,
+      "validator": 52800000,
+      "community": 33000000,
+      "agent": 6600000
+    },
+    "avg_fee_rate": 0.0153,
+    "min_fee_applied_count": 2
+  }
+}

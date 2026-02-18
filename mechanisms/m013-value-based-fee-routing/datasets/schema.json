@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m013 replay dataset",
+  "type": "object",
+  "required": [
+    "mechanism_id",
+    "scope",
+    "as_of",
+    "fee_config",
+    "fee_events"
+  ],
+  "properties": {
+    "mechanism_id": {
+      "const": "m013"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": "string",
+      "description": "ISO-8601 datetime",
+      "format": "date-time"
+    },
+    "fee_config": {
+      "type": "object",
+      "required": [
+        "fee_rates",
+        "distribution_shares",
+        "min_fee_uregen"
+      ],
+      "properties": {
+        "fee_rates": {
+          "type": "object",
+          "required": [
+            "CreditIssuance",
+            "CreditTransfer",
+            "CreditRetirement",
+            "MarketplaceTrade"
+          ],
+          "properties": {
+            "CreditIssuance": { "type": "number" },
+            "CreditTransfer": { "type": "number" },
+            "CreditRetirement": { "type": "number" },
+            "MarketplaceTrade": { "type": "number" }
+          }
+        },
+        "distribution_shares": {
+          "type": "object",
+          "required": ["burn", "validator", "community", "agent"],
+          "properties": {
+            "burn": { "type": "number" },
+            "validator": { "type": "number" },
+            "community": { "type": "number" },
+            "agent": { "type": "number" }
+          }
+        },
+        "min_fee_uregen": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "fee_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "tx_hash",
+          "tx_type",
+          "timestamp",
+          "value_uregen",
+          "payer"
+        ],
+        "properties": {
+          "tx_hash": {
+            "type": "string"
+          },
+          "tx_type": {
+            "type": "string",
+            "enum": [
+              "CreditIssuance",
+              "CreditTransfer",
+              "CreditRetirement",
+              "MarketplaceTrade"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value_uregen": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "payer": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

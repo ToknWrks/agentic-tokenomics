@@ -1,0 +1,132 @@
+/**
+ * m013 — Value-Based Fee Routing: reference implementation (v0).
+ *
+ * Computes value-proportional fees for ecological credit transactions
+ * and distributes fee revenue across four purpose-specific pools.
+ *
+ * All monetary values are in uregen (1 REGEN = 1,000,000 uregen).
+ *
+ * @module m013_fee
+ */
+
+/** Default fee rates by transaction type (v0 Model A). */
+export const DEFAULT_FEE_RATES = {
+  CreditIssuance: 0.02,
+  CreditTransfer: 0.001,
+  CreditRetirement: 0.005,
+  MarketplaceTrade: 0.01
+};
+
+/** Default distribution shares (v0 Model A). */
+export const DEFAULT_DISTRIBUTION_SHARES = {
+  burn: 0.30,
+  validator: 0.40,
+  community: 0.25,
+  agent: 0.05
+};
+
+/** Default minimum fee in uregen (1 REGEN). */
+export const DEFAULT_MIN_FEE_UREGEN = 1000000;
+
+/**
+ * Compute the fee and distribution for a single credit transaction.
+ *
+ * @param {Object} opts
+ * @param {string} opts.tx_type - One of: CreditIssuance, CreditTransfer, CreditRetirement, MarketplaceTrade
+ * @param {number} opts.value - Transaction value in uregen
+ * @param {Object} [opts.fee_config] - Fee configuration (rates, shares, min_fee)
+ * @param {Object} [opts.fee_config.fee_rates] - Fee rates by tx type
+ * @param {Object} [opts.fee_config.distribution_shares] - Distribution shares (must sum to 1.0)
+ * @param {number} [opts.fee_config.min_fee_uregen] - Minimum fee floor in uregen
+ * @returns {{ fee_amount: number, min_fee_applied: boolean, distribution: { burn: number, validator: number, community: number, agent: number } }}
+ */
+export function computeFee({ tx_type, value, fee_config }) {
+  const rates = fee_config?.fee_rates ?? DEFAULT_FEE_RATES;
+  const shares = fee_config?.distribution_shares ?? DEFAULT_DISTRIBUTION_SHARES;
+  const minFee = fee_config?.min_fee_uregen ?? DEFAULT_MIN_FEE_UREGEN;
+
+  const rate = rates[tx_type];
+  if (rate === undefined) {
+    throw new Error(`Unknown tx_type: ${tx_type}`);
+  }
+
+  const rawFee = Math.floor(value * rate);
+  const minFeeApplied = rawFee < minFee;
+  const feeAmount = Math.max(rawFee, minFee);
+
+  const distribution = {
+    burn: Math.floor(feeAmount * shares.burn),
+    validator: Math.floor(feeAmount * shares.validator),
+    community: Math.floor(feeAmount * shares.community),
+    agent: Math.floor(feeAmount * shares.agent)
+  };
+
+  return {
+    fee_amount: feeAmount,
+    min_fee_applied: minFeeApplied,
+    distribution
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Self-test harness: reads test vectors, computes, compares, exit(1) on mismatch
+// ---------------------------------------------------------------------------
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import path from "node:path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const vectorDir = path.join(__dirname, "test_vectors");
+const inputPath = path.join(vectorDir, "vector_v0_sample.input.json");
+const expectedPath = path.join(vectorDir, "vector_v0_sample.expected.json");
+
+if (fs.existsSync(inputPath) && fs.existsSync(expectedPath)) {
+  const input = JSON.parse(fs.readFileSync(inputPath, "utf8"));
+  const expected = JSON.parse(fs.readFileSync(expectedPath, "utf8"));
+
+  const feeConfig = input.fee_config;
+  const results = [];
+  let failures = 0;
+
+  for (let i = 0; i < input.fee_events.length; i++) {
+    const ev = input.fee_events[i];
+    const result = computeFee({
+      tx_type: ev.tx_type,
+      value: ev.value_uregen,
+      fee_config: feeConfig
+    });
+
+    const exp = expected.fee_results[i];
+
+    if (result.fee_amount !== exp.fee_amount_uregen) {
+      console.error(`FAIL [${ev.tx_hash}]: fee_amount ${result.fee_amount} !== expected ${exp.fee_amount_uregen}`);
+      failures++;
+    }
+    if (result.min_fee_applied !== exp.min_fee_applied) {
+      console.error(`FAIL [${ev.tx_hash}]: min_fee_applied ${result.min_fee_applied} !== expected ${exp.min_fee_applied}`);
+      failures++;
+    }
+    for (const pool of ["burn", "validator", "community", "agent"]) {
+      if (result.distribution[pool] !== exp.distribution[pool]) {
+        console.error(`FAIL [${ev.tx_hash}]: distribution.${pool} ${result.distribution[pool]} !== expected ${exp.distribution[pool]}`);
+        failures++;
+      }
+    }
+
+    results.push({
+      tx_hash: ev.tx_hash,
+      fee_amount_uregen: result.fee_amount,
+      min_fee_applied: result.min_fee_applied,
+      distribution: result.distribution
+    });
+  }
+
+  if (failures > 0) {
+    console.error(`\nm013_fee self-test: ${failures} failure(s)`);
+    process.exit(1);
+  }
+
+  console.log("m013_fee self-test: PASS");
+}
