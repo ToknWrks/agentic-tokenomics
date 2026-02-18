@@ -18,3 +18,21 @@ This document maps **mechanism IDs** to known **consumers** (agents, digests, sc
 - Heartbeat replay runner: `scripts/replay-m010.mjs` (regen-heartbeat)
 - Heartbeat stub runner: `scripts/stub-run-signal-agent.mjs` (regen-heartbeat)
 - Heartbeat validator: `scripts/validate-signal-agent.mjs` (regen-heartbeat)
+
+## m008 — Data Attestation Bonding
+**Canonical spec**
+- `mechanisms/m008-attestation-bonding/SPEC.md`
+
+**Outputs**
+- KPI JSON block schema: `mechanisms/m008-attestation-bonding/schemas/m008_kpi.schema.json`
+- Quality score schema: `mechanisms/m008-attestation-bonding/schemas/m008_quality_score.schema.json`
+- Attestation lifecycle schema: `mechanisms/m008-attestation-bonding/schemas/m008_attestation.schema.json`
+
+**Datasets (deterministic)**
+- Replay fixtures: `mechanisms/m008-attestation-bonding/datasets/fixtures/v0_sample.json`
+- Challenge scenarios: `mechanisms/m008-attestation-bonding/datasets/fixtures/v0_challenge_sample.json`
+
+**Known consumers**
+- Heartbeat character: `attestation-agent` (regen-heartbeat, planned)
+- KOI MCP: attestation quality lookups via `resolve_entity` / `get_entity_documents`
+- Ledger MCP: bond balance queries via `get_balance` / `get_all_balances`
