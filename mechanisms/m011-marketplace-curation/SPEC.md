@@ -214,7 +214,7 @@ Featured status lasts 7 days (renewable). Agent recommends (Layer 1), curator co
 1. **Bond Conservation**: `bond_pool.balance = sum(active_collection_bonds) + sum(pending_refunds)` at all times.
 2. **Criteria Enforcement**: Every batch in a collection must satisfy the collection's `CurationCriteria` at addition time; AGENT-003 re-verifies daily for drift.
 3. **Curator Authority**: Only the collection curator can add/remove batches; agents cannot modify collection membership directly.
-4. **Slash Cap**: Cumulative slashing cannot exceed the curator's total bond; if `bond_remaining < min_curation_bond` after slash → CLOSED.
+4. **Slash Cap**: Cumulative slashing cannot exceed the curator's total bond. If `bond_remaining < min_curation_bond` after a slash, the collection transitions to SUSPENDED. If the bond is not topped up within `bond_top_up_window`, the collection then transitions to CLOSED.
 5. **No Self-Challenge**: Curator cannot challenge own collection; challenger cannot be seller of challenged batch.
 6. **Fee Integrity**: Curation fees only on trades through a collection; direct trades incur no curation fee.
 7. **Quality Score Immutability**: Scores are append-only (superseded, never edited); full history preserved.

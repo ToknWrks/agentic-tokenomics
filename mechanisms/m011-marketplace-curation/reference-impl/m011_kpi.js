@@ -41,12 +41,13 @@ export function computeM011KPI({ as_of, collections, scored_batches }) {
   const bonds = colls.map(c => parseInt(c.bond?.amount ?? "0", 10)).filter(b => b > 0);
   const total_bonded = bonds.reduce((s, b) => s + b, 0);
 
+  const DEFAULT_SLASH_PERCENTAGE = 0.20; // governance parameter, see SPEC.md
   const slashed_colls = colls.filter(c =>
     c.challenge?.outcome === "CHALLENGER_WINS"
   );
   const total_slashed = slashed_colls.reduce((s, c) => {
     const bond = parseInt(c.bond?.amount ?? "0", 10);
-    return s + Math.round(bond * 0.20); // default slash_percentage
+    return s + Math.round(bond * DEFAULT_SLASH_PERCENTAGE);
   }, 0);
 
   const total_trade_volume = colls.reduce((s, c) =>
