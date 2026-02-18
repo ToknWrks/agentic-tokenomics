@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schemas/m015_kpi.schema.json",
+  "description": "Single distribution period (epoch 2026-W07) with 4 participants. Deterministic fixture — no MCP required.",
+  "epoch": "2026-W07",
+  "community_pool_inflow_uregen": 1000000000,
+  "periods_per_year": 52,
+  "max_stability_share": 0.30,
+  "stability_commitments": [
+    {
+      "holder_address": "regen1alice0example",
+      "committed_amount_uregen": 500000000,
+      "lock_period_months": 12,
+      "status": "committed",
+      "committed_at": "2025-08-01T00:00:00Z",
+      "matured_at": null,
+      "exited_at": null,
+      "accrued_rewards_uregen": 14423076,
+      "forfeited_rewards_uregen": 0,
+      "annual_return_rate": 0.06
+    }
+  ],
+  "participants": [
+    {
+      "address": "regen1alice0example",
+      "label": "heavy buyer/retirer + stability tier",
+      "activities": {
+        "credit_purchase_value": 100000000,
+        "credit_retirement_value": 50000000,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 3,
+        "proposals": [
+          { "id": "prop-42", "passed": true, "reached_quorum": true }
+        ]
+      },
+      "computed": {
+        "total_score": 45000000.4,
+        "activity_reward_uregen": 603678362,
+        "activity_share": 0.604027,
+        "stability_reward_uregen": 576923,
+        "total_reward_uregen": 604255285
+      }
+    },
+    {
+      "address": "regen1bob00example",
+      "label": "platform operator",
+      "activities": {
+        "credit_purchase_value": 20000000,
+        "credit_retirement_value": 0,
+        "platform_facilitation_value": 80000000,
+        "governance_votes_cast": 1,
+        "proposals": []
+      },
+      "computed": {
+        "total_score": 22000000.1,
+        "activity_reward_uregen": 295131642,
+        "activity_share": 0.295302,
+        "stability_reward_uregen": 0,
+        "total_reward_uregen": 295131642
+      }
+    },
+    {
+      "address": "regen1carol0example",
+      "label": "governance-focused with mixed proposal outcomes",
+      "activities": {
+        "credit_purchase_value": 10000000,
+        "credit_retirement_value": 10000000,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 8,
+        "proposals": [
+          { "id": "prop-43", "passed": true, "reached_quorum": true },
+          { "id": "prop-44", "passed": false, "reached_quorum": true },
+          { "id": "prop-45", "passed": false, "reached_quorum": false }
+        ]
+      },
+      "computed": {
+        "total_score": 6000000.95,
+        "activity_reward_uregen": 80490460,
+        "activity_share": 0.080537,
+        "stability_reward_uregen": 0,
+        "total_reward_uregen": 80490460
+      }
+    },
+    {
+      "address": "regen1dave0example",
+      "label": "minimal participant — single small purchase + 1 vote",
+      "activities": {
+        "credit_purchase_value": 5000000,
+        "credit_retirement_value": 0,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 1,
+        "proposals": [
+          { "id": "prop-46", "passed": false, "reached_quorum": false }
+        ]
+      },
+      "computed": {
+        "total_score": 1500000.1,
+        "activity_reward_uregen": 20122613,
+        "activity_share": 0.020134,
+        "stability_reward_uregen": 0,
+        "total_reward_uregen": 20122613
+      }
+    }
+  ],
+  "summary": {
+    "stability_allocation_uregen": 576923,
+    "activity_pool_uregen": 999423077,
+    "total_distributed_uregen": 1000000000,
+    "participant_count": 4,
+    "stability_commitments_count": 1,
+    "stability_cap_utilization": 0.001923,
+    "notes": "Stability demand (576,923 uregen) well below 30% cap (300,000,000 uregen). Activity pool receives 99.9% of inflow."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m015 stability tier commitment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "holder_address",
+    "committed_amount_uregen",
+    "lock_period_months",
+    "status",
+    "committed_at"
+  ],
+  "properties": {
+    "holder_address": {
+      "type": "string",
+      "description": "Regen network address of the stability tier holder"
+    },
+    "committed_amount_uregen": {
+      "type": "integer",
+      "minimum": 100000000,
+      "description": "Committed amount in uregen (minimum 100 REGEN = 100,000,000 uregen)"
+    },
+    "lock_period_months": {
+      "type": "integer",
+      "minimum": 6,
+      "maximum": 24,
+      "description": "Lock period in months (min 6, max 24)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["uncommitted", "committed", "matured", "early_exit"],
+      "description": "Stability commitment lifecycle state"
+    },
+    "committed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when commitment was made"
+    },
+    "matured_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when commitment matured (null if not yet matured)"
+    },
+    "exited_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of early exit (null if not exited early)"
+    },
+    "accrued_rewards_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total rewards accrued so far in uregen"
+    },
+    "forfeited_rewards_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Rewards forfeited due to early exit (50% of accrued) in uregen"
+    },
+    "annual_return_rate": {
+      "type": "number",
+      "const": 0.06,
+      "description": "Fixed annual return rate (6%)"
+    }
+  }
+}

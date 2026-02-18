@@ -1,0 +1,150 @@
+{
+  "description": "Stability tier scenario fixture — tests committed, matured, and early-exit lifecycle states with cap overflow. Deterministic — no MCP required.",
+  "epoch": "2026-W07",
+  "community_pool_inflow_uregen": 500000000,
+  "periods_per_year": 52,
+  "max_stability_share": 0.30,
+  "scenarios": [
+    {
+      "label": "Normal: demand well below cap",
+      "stability_commitments": [
+        {
+          "holder_address": "regen1stab1example",
+          "committed_amount_uregen": 200000000,
+          "lock_period_months": 12,
+          "status": "committed",
+          "committed_at": "2025-06-01T00:00:00Z",
+          "matured_at": null,
+          "exited_at": null,
+          "accrued_rewards_uregen": 0,
+          "forfeited_rewards_uregen": 0,
+          "annual_return_rate": 0.06
+        }
+      ],
+      "expected": {
+        "raw_allocation_uregen": 230769,
+        "cap_uregen": 150000000,
+        "stability_allocation_uregen": 230769,
+        "capped": false,
+        "activity_pool_uregen": 499769231,
+        "notes": "200M uregen * 0.06 / 52 = 230,769. Well below 150M cap."
+      }
+    },
+    {
+      "label": "Multiple commitments: still below cap",
+      "stability_commitments": [
+        {
+          "holder_address": "regen1stab1example",
+          "committed_amount_uregen": 200000000,
+          "lock_period_months": 12,
+          "status": "committed",
+          "committed_at": "2025-06-01T00:00:00Z",
+          "matured_at": null,
+          "exited_at": null,
+          "accrued_rewards_uregen": 6923076,
+          "forfeited_rewards_uregen": 0,
+          "annual_return_rate": 0.06
+        },
+        {
+          "holder_address": "regen1stab2example",
+          "committed_amount_uregen": 1000000000,
+          "lock_period_months": 24,
+          "status": "committed",
+          "committed_at": "2025-09-01T00:00:00Z",
+          "matured_at": null,
+          "exited_at": null,
+          "accrued_rewards_uregen": 0,
+          "forfeited_rewards_uregen": 0,
+          "annual_return_rate": 0.06
+        },
+        {
+          "holder_address": "regen1stab3example",
+          "committed_amount_uregen": 500000000,
+          "lock_period_months": 6,
+          "status": "committed",
+          "committed_at": "2025-12-01T00:00:00Z",
+          "matured_at": null,
+          "exited_at": null,
+          "accrued_rewards_uregen": 0,
+          "forfeited_rewards_uregen": 0,
+          "annual_return_rate": 0.06
+        }
+      ],
+      "expected": {
+        "raw_allocation_uregen": 1961538,
+        "cap_uregen": 150000000,
+        "stability_allocation_uregen": 1961538,
+        "capped": false,
+        "activity_pool_uregen": 498038462,
+        "notes": "1.7B uregen total committed * 0.06 / 52 = 1,961,538. Still below 150M cap."
+      }
+    },
+    {
+      "label": "Cap hit: extreme commitment volume",
+      "stability_commitments": [
+        {
+          "holder_address": "regen1whale0example",
+          "committed_amount_uregen": 200000000000,
+          "lock_period_months": 24,
+          "status": "committed",
+          "committed_at": "2025-01-01T00:00:00Z",
+          "matured_at": null,
+          "exited_at": null,
+          "accrued_rewards_uregen": 0,
+          "forfeited_rewards_uregen": 0,
+          "annual_return_rate": 0.06
+        }
+      ],
+      "expected": {
+        "raw_allocation_uregen": 230769230,
+        "cap_uregen": 150000000,
+        "stability_allocation_uregen": 150000000,
+        "capped": true,
+        "activity_pool_uregen": 350000000,
+        "notes": "200B uregen * 0.06 / 52 = 230,769,230 but capped at 30% of 500M = 150M."
+      }
+    },
+    {
+      "label": "Matured commitment — full payout",
+      "commitment": {
+        "holder_address": "regen1mature0example",
+        "committed_amount_uregen": 100000000,
+        "lock_period_months": 6,
+        "status": "matured",
+        "committed_at": "2025-08-01T00:00:00Z",
+        "matured_at": "2026-02-01T00:00:00Z",
+        "exited_at": null,
+        "accrued_rewards_uregen": 2999999,
+        "forfeited_rewards_uregen": 0,
+        "annual_return_rate": 0.06
+      },
+      "expected": {
+        "total_return_uregen": 2999999,
+        "penalty_uregen": 0,
+        "net_payout_uregen": 2999999,
+        "notes": "100M uregen * 0.06 * (6/12) = 3,000,000 (minus rounding). Full payout on maturity."
+      }
+    },
+    {
+      "label": "Early exit — 50% penalty",
+      "commitment": {
+        "holder_address": "regen1early0example",
+        "committed_amount_uregen": 100000000,
+        "lock_period_months": 12,
+        "status": "early_exit",
+        "committed_at": "2025-08-01T00:00:00Z",
+        "matured_at": null,
+        "exited_at": "2025-11-01T00:00:00Z",
+        "accrued_rewards_uregen": 1500000,
+        "forfeited_rewards_uregen": 750000,
+        "annual_return_rate": 0.06
+      },
+      "expected": {
+        "accrued_uregen": 1500000,
+        "penalty_uregen": 750000,
+        "net_payout_uregen": 750000,
+        "notes": "100M uregen * 0.06 * (3/12) = 1,500,000 accrued. 50% penalty = 750,000 forfeited. Net = 750,000."
+      }
+    }
+  ]
+}
