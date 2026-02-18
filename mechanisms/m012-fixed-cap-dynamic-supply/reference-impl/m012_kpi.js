@@ -51,7 +51,7 @@ export function computeM012KPI({ as_of, periods, hard_cap }) {
   const last = ps[ps.length - 1];
   const currentSupply = BigInt(last.supply_after ?? last.next_supply);
   const headroom = cap - currentSupply;
-  const capUtil = Number(currentSupply) / Number(cap);
+  const capUtil = Number(cap) > 0 ? Number(currentSupply) / Number(cap) : 0;
   const netChange = totalMinted - totalBurned;
 
   // Equilibrium detection: gap as percentage
@@ -62,11 +62,12 @@ export function computeM012KPI({ as_of, periods, hard_cap }) {
     : null;
 
   let equilibriumStatus = "not_reached";
-  if (gapPct !== null && gapPct < 5) {
-    equilibriumStatus = "approaching";
-  }
-  if (gapPct !== null && gapPct < 1) {
-    equilibriumStatus = "reached";
+  if (gapPct !== null) {
+    if (gapPct < 1) {
+      equilibriumStatus = "reached";
+    } else if (gapPct < 5) {
+      equilibriumStatus = "approaching";
+    }
   }
 
   return {

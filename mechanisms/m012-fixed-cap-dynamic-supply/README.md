@@ -26,6 +26,6 @@ See `datasets/` for deterministic fixtures used to generate non-zero KPI outputs
 
 ## Schemas
 Canonical JSON schemas for m012 outputs live in `schemas/`.
-- `m012_supply_state.schema.json` — supply state (supply, cap, minted, burned, rates, multipliers)
+- `m012_supply_state.schema.json` — supply state (current supply, cap, staked amounts, multiplier config)
 - `m012_period_record.schema.json` — per-period mint/burn record
 - `m012_kpi.schema.json` — KPI output with mechanism_id const "m012"

@@ -70,7 +70,7 @@ stability_multiplier = clamp(1 + (S_stability_committed / S_total), 1.0, 2.0)
 
 Phase-gated behavior:
   - if m014.state == INACTIVE:     effective_multiplier = staking_multiplier
-  - if m014.state == TRANSITION:   effective_multiplier = max(staking, stability)
+  - if m014.state == TRANSITION:   effective_multiplier = max(staking_multiplier, stability_multiplier)
   - if m014.state in {ACTIVE, EQUILIBRIUM}: effective_multiplier = stability_multiplier
 ```
 
@@ -131,7 +131,7 @@ TRANSITION -> DYNAMIC
 
 DYNAMIC -> EQUILIBRIUM
   trigger: abs(M[t] - B[t]) < threshold for N consecutive periods
-  guard: N >= 12 (12 months of near-balance)
+  guard: N >= 12 (~3 months of near-balance at ~7-day periods)
   action: log equilibrium_reached, reduce monitoring frequency
   note: equilibrium is not permanent -- external shocks can return to DYNAMIC
 
