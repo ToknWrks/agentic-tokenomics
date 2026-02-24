@@ -41,6 +41,7 @@
         "submitted",
         "active",
         "challenged",
+        "escalated",
         "resolved_valid",
         "resolved_invalid",
         "withdrawn",

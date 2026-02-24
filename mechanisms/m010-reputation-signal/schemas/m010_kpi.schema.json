@@ -78,7 +78,7 @@
           "type": "number",
           "minimum": 0.0,
           "maximum": 1.0,
-          "description": "challenges_filed / total_active_signals"
+          "description": "challenges_filed / signals_emitted (events in the reporting period)"
         },
         "avg_resolution_time_hours": {
           "type": ["number", "null"],
