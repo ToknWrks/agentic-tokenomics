@@ -33,16 +33,33 @@ requireFile("mechanisms/m010-reputation-signal/SPEC.md");
 requireFile("mechanisms/m010-reputation-signal/README.md");
 requireFile("mechanisms/m010-reputation-signal/schemas/m010_kpi.schema.json");
 requireFile("mechanisms/m010-reputation-signal/schemas/m010_signal.schema.json");
+requireFile("mechanisms/m010-reputation-signal/schemas/m010_challenge.schema.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/schema.json");
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_sample.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sample.json");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_kpi.js");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_score.js");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_sample.input.json");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_sample.expected.json");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_challenge.expected.json");
+requireFile("scripts/verify-m010-reference-impl.mjs");
 
 // Mechanism index check
 run("node", ["scripts/build-mechanism-index.mjs", "--check"]);
+run("node", ["scripts/verify-m010-reference-impl.mjs"]);
 
 // Basic schema sanity
 const kpiSchema = readJson("mechanisms/m010-reputation-signal/schemas/m010_kpi.schema.json");
 if (!kpiSchema.required || !kpiSchema.required.includes("mechanism_id")) {
   console.error("KPI schema missing required fields.");
   process.exit(4);
+}
+
+const signalSchema = readJson("mechanisms/m010-reputation-signal/schemas/m010_signal.schema.json");
+const signalStatus = signalSchema.properties?.status?.enum ?? [];
+if (!signalStatus.includes("escalated")) {
+  console.error("Signal schema missing escalated status.");
+  process.exit(5);
 }
 
 console.log("agentic-tokenomics verify: PASS");

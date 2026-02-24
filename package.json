@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "verify": "node scripts/verify.mjs",
+    "verify:m010": "node scripts/verify-m010-reference-impl.mjs",
     "build:index": "node scripts/build-mechanism-index.mjs",
     "check:index": "node scripts/build-mechanism-index.mjs --check"
   }
