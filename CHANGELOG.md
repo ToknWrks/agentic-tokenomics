@@ -6,6 +6,7 @@
 - m010 reference implementation vector verifier (`scripts/verify-m010-reference-impl.mjs`) with challenge replay coverage.
 - m010 dataset integrity verifier (`scripts/verify-m010-datasets.mjs`) covering challenge linkage, lifecycle consistency, and expected output coherence.
 - Additional m010 challenge fixtures for escalated and edge-timing scenarios, plus an intentionally invalid fixture for negative verification coverage.
+- Additional verifier invariants for m010 (status/outcome consistency, duplicate detection, evidence minimums, and derived KPI coherence checks).
 
 ### Changed
 - m010 scoring now excludes non-contributing signal states when `status` is present (`active`/`resolved_valid` only contribute).

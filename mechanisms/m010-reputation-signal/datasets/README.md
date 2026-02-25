@@ -9,6 +9,7 @@ These fixtures are **deterministic inputs** for generating non-zero m010 KPI out
 - `fixtures/v0_challenge_escalated_sample.json` — challenge replay including `escalated` status and timeout KPI behavior
 - `fixtures/v0_challenge_edge_timing_sample.json` — challenge replay covering boundary timing (including zero-hour resolution)
 - `fixtures/v0_challenge_invalid_resolution_sample.json` — intentionally invalid fixture for negative verification coverage
+- `fixtures/v0_challenge_invalid_outcome_sample.json` — intentionally invalid fixture with status/outcome mismatch for negative verification coverage
 
 ## How they are used
 A replay runner (e.g., in `regen-heartbeat`) can read a fixture file and compute:

@@ -40,6 +40,7 @@ requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sa
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_escalated_sample.json");
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_edge_timing_sample.json");
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_invalid_resolution_sample.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_invalid_outcome_sample.json");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_kpi.js");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_score.js");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_sample.input.json");
