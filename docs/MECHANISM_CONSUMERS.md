@@ -14,6 +14,8 @@ This document maps **mechanism IDs** to known **consumers** (agents, digests, sc
 **Datasets (deterministic)**
 - Replay fixtures: `mechanisms/m010-reputation-signal/datasets/fixtures/v0_sample.json`
 - Challenge replay fixture: `mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sample.json`
+- Escalated challenge fixture: `mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_escalated_sample.json`
+- Edge-timing challenge fixture: `mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_edge_timing_sample.json`
 
 **Known consumers**
 - Heartbeat character: `signal-agent` (regen-heartbeat)

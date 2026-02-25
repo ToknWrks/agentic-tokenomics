@@ -37,11 +37,16 @@ requireFile("mechanisms/m010-reputation-signal/schemas/m010_challenge.schema.jso
 requireFile("mechanisms/m010-reputation-signal/datasets/schema.json");
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_sample.json");
 requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sample.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_escalated_sample.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_edge_timing_sample.json");
+requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_invalid_resolution_sample.json");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_kpi.js");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/m010_score.js");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_sample.input.json");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_sample.expected.json");
 requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_challenge.expected.json");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_challenge_escalated.expected.json");
+requireFile("mechanisms/m010-reputation-signal/reference-impl/test_vectors/vector_v0_challenge_edge_timing.expected.json");
 requireFile("scripts/verify-m010-reference-impl.mjs");
 requireFile("scripts/verify-m010-datasets.mjs");
 

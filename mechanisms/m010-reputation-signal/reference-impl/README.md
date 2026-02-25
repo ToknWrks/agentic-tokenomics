@@ -45,3 +45,8 @@ When `challenges[]` are provided to `computeM010KPI`, output includes `challenge
 ### Deterministic vectors
 Reference vectors live in `test_vectors/` and are validated by:
 - `node scripts/verify-m010-reference-impl.mjs`
+- Coverage includes:
+  - baseline replay (`v0_sample`)
+  - mixed challenge statuses (`v0_challenge_sample`)
+  - escalated challenge path (`v0_challenge_escalated_sample`)
+  - edge timing path (`v0_challenge_edge_timing_sample`)

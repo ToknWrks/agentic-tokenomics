@@ -6,6 +6,9 @@ These fixtures are **deterministic inputs** for generating non-zero m010 KPI out
 - `schema.json` — JSON schema for replay datasets
 - `fixtures/v0_sample.json` — sample events used by Heartbeat replay runner (all signals active)
 - `fixtures/v0_challenge_sample.json` — sample events exercising the challenge workflow (signals with varied statuses + challenge events with resolutions)
+- `fixtures/v0_challenge_escalated_sample.json` — challenge replay including `escalated` status and timeout KPI behavior
+- `fixtures/v0_challenge_edge_timing_sample.json` — challenge replay covering boundary timing (including zero-hour resolution)
+- `fixtures/v0_challenge_invalid_resolution_sample.json` — intentionally invalid fixture for negative verification coverage
 
 ## How they are used
 A replay runner (e.g., in `regen-heartbeat`) can read a fixture file and compute:
@@ -27,3 +30,4 @@ Dataset integrity is validated by `scripts/verify-m010-datasets.mjs`, including:
 - category consistency between challenge and targeted signal
 - resolution timestamp ordering and resolution presence rules by challenge status
 - consistency of `expected_outputs.contributing_signals` / `excluded_signals` with status-based contribution rules
+- negative checks that intentionally invalid fixtures fail with the expected validation reason

@@ -66,9 +66,31 @@ function verifyChallengeFixture(rel) {
   }
 }
 
+function assertFails(fn, expectedPattern, label) {
+  let failed = false;
+  try {
+    fn();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    assert(expectedPattern.test(message), `${label}: expected error matching ${expectedPattern}, got '${message}'`);
+    failed = true;
+  }
+  assert(failed, `${label}: expected verification to fail`);
+}
+
 function main() {
   const sampleRel = "mechanisms/m010-reputation-signal/datasets/fixtures/v0_sample.json";
-  const challengeRel = "mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sample.json";
+  const validChallengeFixtures = [
+    "mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_sample.json",
+    "mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_escalated_sample.json",
+    "mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_edge_timing_sample.json"
+  ];
+  const invalidChallengeFixtures = [
+    {
+      rel: "mechanisms/m010-reputation-signal/datasets/fixtures/v0_challenge_invalid_resolution_sample.json",
+      pattern: /must not include resolution/
+    }
+  ];
 
   const sample = readJson(sampleRel);
   assert(sample.events?.length > 0, `${sampleRel}: events must not be empty`);
@@ -76,7 +98,12 @@ function main() {
     assertIsoDate(e.timestamp, `${sampleRel}: event[${idx}] timestamp`);
   }
 
-  verifyChallengeFixture(challengeRel);
+  for (const rel of validChallengeFixtures) {
+    verifyChallengeFixture(rel);
+  }
+  for (const { rel, pattern } of invalidChallengeFixtures) {
+    assertFails(() => verifyChallengeFixture(rel), pattern, rel);
+  }
   console.log("m010 dataset integrity: PASS");
 }
 
