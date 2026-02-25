@@ -10,7 +10,7 @@ Below are projects building on or alongside this framework. If you are working o
 
 ## Core Stack
 
-The core development stack spans four repositories with defined data flows and ownership boundaries. See [`architecture/STACK_MAP.md`](architecture/STACK_MAP.md) for the full diagram and routing guide.
+The core development stack spans this repo plus three additional repositories with defined data flows and ownership boundaries. See [`architecture/STACK_MAP.md`](architecture/STACK_MAP.md) for the full diagram and routing guide.
 
 - **[regen-network/koi-research](https://github.com/regen-network/koi-research)** — Research artifacts, datasets, extractors, ontologies, and tooling.
 - **[gaiaaiagent/regen-ai-claude](https://github.com/gaiaaiagent/regen-ai-claude)** — Agent skills, Claude configurations, and MCP adapter interfaces.
