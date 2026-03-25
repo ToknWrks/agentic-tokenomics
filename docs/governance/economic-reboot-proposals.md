@@ -287,7 +287,7 @@ The transition from PoS to PoA directly affects all REGEN delegators and validat
 > - Supply contraction from fee-funded burning ties deflation to real economic activity rather than artificial tokenomic mechanisms.
 >
 > **Impact**:
-> - Circulating supply gains a hard ceiling at approximately current total supply levels.
+> - **Important**: The proposed 221M cap is approximately 3M REGEN below current circulating supply (~224M). This is intentional. When supply exceeds the cap, minting is zero (headroom is negative, floored to 0 per M012 spec). Supply decreases exclusively via M013 fee burning until it drops below 221M, at which point regrowth minting resumes. This creates an initial deflationary period of approximately 3-6 months depending on fee volume. This dynamic is a feature, not a bug — it establishes immediate scarcity and ties recovery to real network activity.
 > - Inflationary staking rewards cease (replaced by M014 fee compensation and M015 activity rewards).
 > - Net supply direction depends on the balance between regrowth minting and fee-based burning.
 >
