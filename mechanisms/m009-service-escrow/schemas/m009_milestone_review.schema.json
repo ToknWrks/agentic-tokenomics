@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "m009_milestone_review_v0",
+  "title": "m009 milestone review score",
+  "description": "Schema for an M009 milestone review quality score output.",
+  "type": "object",
+  "required": ["score", "confidence", "recommendation", "factors"],
+  "properties": {
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "description": "Weighted composite score of milestone deliverable quality."
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "description": "Data availability indicator (count of available signals / 4 × 1000)."
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": ["APPROVE", "NEEDS_REVISION", "FLAG_FOR_CLIENT"],
+      "description": "Agent recommendation for the milestone deliverable."
+    },
+    "factors": {
+      "type": "object",
+      "required": [
+        "deliverable_quality",
+        "evidence_completeness",
+        "milestone_consistency",
+        "provider_reputation"
+      ],
+      "properties": {
+        "deliverable_quality": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Methodology compliance and technical quality."
+        },
+        "evidence_completeness": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Evidence IRI resolvability and document completeness."
+        },
+        "milestone_consistency": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Consistency with prior milestones and agreement specification."
+        },
+        "provider_reputation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "M010 reputation score of the provider (default 300 if unavailable)."
+        }
+      }
+    }
+  }
+}

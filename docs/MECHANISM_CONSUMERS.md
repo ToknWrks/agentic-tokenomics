@@ -53,3 +53,22 @@ This document maps **mechanism IDs** to known **consumers** (agents, digests, sc
 - Heartbeat character: `attestation-agent` (regen-heartbeat, planned)
 - KOI MCP: attestation quality lookups via `resolve_entity` / `get_entity_documents`
 - Ledger MCP: bond balance queries via `get_balance` / `get_all_balances`
+## m009 — Service Provision Escrow
+**Canonical spec**
+- `mechanisms/m009-service-escrow/SPEC.md`
+
+**Outputs**
+- KPI JSON block schema: `mechanisms/m009-service-escrow/schemas/m009_kpi.schema.json`
+- Milestone review schema: `mechanisms/m009-service-escrow/schemas/m009_milestone_review.schema.json`
+- Agreement lifecycle schema: `mechanisms/m009-service-escrow/schemas/m009_agreement.schema.json`
+
+**Datasets (deterministic)**
+- Replay fixtures: `mechanisms/m009-service-escrow/datasets/fixtures/v0_sample.json`
+- Dispute scenarios: `mechanisms/m009-service-escrow/datasets/fixtures/v0_dispute_sample.json`
+
+**Known consumers**
+- Heartbeat character: `escrow-agent` (regen-heartbeat, planned)
+- AGENT-001: Milestone deliverable review (advisory)
+- AGENT-003: Pricing fairness monitor (advisory)
+- KOI MCP: deliverable IRI resolution via `resolve_entity` / `get_entity_documents`
+- Ledger MCP: escrow balance queries via `get_balance` / `get_all_balances`

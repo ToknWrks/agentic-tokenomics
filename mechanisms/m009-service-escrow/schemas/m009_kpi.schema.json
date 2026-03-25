@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "m009_kpi_v0",
+  "title": "m009 KPI block",
+  "description": "Schema for M009 service escrow KPI metrics.",
+  "type": "object",
+  "required": [
+    "mechanism_id",
+    "scope",
+    "as_of",
+    "agreements_proposed",
+    "agreements_funded",
+    "agreements_in_progress",
+    "agreements_completed",
+    "agreements_disputed",
+    "agreements_cancelled",
+    "dispute_rate",
+    "escrow_economics",
+    "milestone_stats"
+  ],
+  "properties": {
+    "mechanism_id": { "const": "m009" },
+    "scope": { "type": "string" },
+    "as_of": { "type": "string", "format": "date-time" },
+    "agreements_proposed": { "type": "integer", "minimum": 0 },
+    "agreements_funded": { "type": "integer", "minimum": 0 },
+    "agreements_in_progress": { "type": "integer", "minimum": 0 },
+    "agreements_completed": { "type": "integer", "minimum": 0 },
+    "agreements_disputed": { "type": "integer", "minimum": 0 },
+    "agreements_cancelled": { "type": "integer", "minimum": 0 },
+    "dispute_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+    "resolution_breakdown": {
+      "type": ["object", "null"],
+      "properties": {
+        "client_wins": { "type": "integer", "minimum": 0 },
+        "provider_wins": { "type": "integer", "minimum": 0 },
+        "split": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "escrow_economics": {
+      "type": "object",
+      "required": ["total_escrowed", "total_released", "total_slashed", "total_fees", "avg_escrow_amount"],
+      "properties": {
+        "total_escrowed": { "type": "string" },
+        "total_released": { "type": "string" },
+        "total_slashed": { "type": "string" },
+        "total_fees": { "type": "string" },
+        "avg_escrow_amount": { "type": ["number", "null"] }
+      }
+    },
+    "milestone_stats": {
+      "type": "object",
+      "required": ["total_milestones", "milestones_approved", "milestones_disputed", "avg_approval_rate"],
+      "properties": {
+        "total_milestones": { "type": "integer", "minimum": 0 },
+        "milestones_approved": { "type": "integer", "minimum": 0 },
+        "milestones_disputed": { "type": "integer", "minimum": 0 },
+        "avg_approval_rate": { "type": ["number", "null"] }
+      }
+    },
+    "service_type_breakdown": {
+      "type": "object",
+      "properties": {
+        "ProjectVerification": { "type": "integer" },
+        "MethodologyDevelopment": { "type": "integer" },
+        "MRVSetup": { "type": "integer" },
+        "CreditIssuanceSupport": { "type": "integer" },
+        "MonitoringReporting": { "type": "integer" }
+      }
+    }
+  }
+}
