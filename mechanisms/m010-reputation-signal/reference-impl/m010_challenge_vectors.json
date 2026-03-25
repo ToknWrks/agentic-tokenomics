@@ -1,0 +1,382 @@
+{
+  "description": "Test vectors for m010 challenge flow. Each vector defines a sequence of signal events with challenge/resolution events interleaved, and the expected score state at each step.",
+  "spec_version": "v0",
+  "scoring_params": {
+    "halfLifeHours": 336,
+    "useStakeWeighting": false,
+    "activation_delay_hours": 24,
+    "challenge_window_days": 180,
+    "resolution_deadline_days": 14
+  },
+  "vectors": [
+    {
+      "id": "challenge_flow_01",
+      "title": "Single signal: active → challenged → resolved VALID → score restores",
+      "subject": {
+        "subject_type": "Project",
+        "subject_id": "P-regen-042",
+        "category": "delivery_risk"
+      },
+      "timeline": [
+        {
+          "step": 1,
+          "action": "submit_signal",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "event": {
+            "signaler_id": "signaler_A",
+            "endorsement_level": 4,
+            "stake": 200,
+            "evidence": {
+              "koi_links": ["koi://note/project-042-review"],
+              "ledger_refs": ["ledger://tx/2001"]
+            }
+          },
+          "expected_state": "SUBMITTED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal in SUBMITTED state; activation delay not yet passed"
+          }
+        },
+        {
+          "step": 2,
+          "action": "activate",
+          "timestamp": "2026-03-02T01:00:00Z",
+          "event": {},
+          "expected_state": "ACTIVE",
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Single signal with endorsement_level=4 → 4/5 = 0.8 (minimal decay at 25h)"
+          }
+        },
+        {
+          "step": 3,
+          "action": "challenge",
+          "timestamp": "2026-03-05T00:00:00Z",
+          "event": {
+            "challenger_id": "challenger_X",
+            "stake": 200,
+            "rationale": "Endorsement appears based on outdated project data from 2024.",
+            "evidence": {
+              "koi_links": ["koi://note/challenge-evidence-042"],
+              "ledger_refs": []
+            }
+          },
+          "expected_state": "CHALLENGED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Challenged signal paused; contribution drops to 0"
+          }
+        },
+        {
+          "step": 4,
+          "action": "resolve_valid",
+          "timestamp": "2026-03-10T00:00:00Z",
+          "event": {
+            "resolver": "admin",
+            "rationale": "Project data verified as current; endorsement is valid."
+          },
+          "expected_state": "RESOLVED_VALID",
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Signal restored after VALID resolution; score contribution resumes (decay minor over 9 days)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "challenge_flow_02",
+      "title": "Single signal: active → challenged → resolved INVALID → score permanently removed",
+      "subject": {
+        "subject_type": "Verifier",
+        "subject_id": "V-DeltaMRV",
+        "category": "attestation_quality"
+      },
+      "timeline": [
+        {
+          "step": 1,
+          "action": "submit_signal",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "event": {
+            "signaler_id": "signaler_B",
+            "endorsement_level": 5,
+            "stake": 300,
+            "evidence": {
+              "koi_links": ["koi://note/verifier-delta-review"],
+              "ledger_refs": ["ledger://tx/3001"]
+            }
+          },
+          "expected_state": "SUBMITTED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Activation delay not passed"
+          }
+        },
+        {
+          "step": 2,
+          "action": "activate",
+          "timestamp": "2026-03-02T01:00:00Z",
+          "event": {},
+          "expected_state": "ACTIVE",
+          "expected_score": {
+            "reputation_score_0_1": 1.0,
+            "reason": "Single signal with endorsement_level=5 → 5/5 = 1.0"
+          }
+        },
+        {
+          "step": 3,
+          "action": "challenge",
+          "timestamp": "2026-03-04T00:00:00Z",
+          "event": {
+            "challenger_id": "challenger_Y",
+            "stake": 300,
+            "rationale": "Verifier accreditation has been revoked; endorsement is misleading.",
+            "evidence": {
+              "koi_links": ["koi://note/revocation-proof"],
+              "ledger_refs": ["ledger://tx/3002"]
+            }
+          },
+          "expected_state": "CHALLENGED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Challenged; score contribution paused"
+          }
+        },
+        {
+          "step": 4,
+          "action": "resolve_invalid",
+          "timestamp": "2026-03-08T00:00:00Z",
+          "event": {
+            "resolver": "admin",
+            "rationale": "Confirmed: verifier accreditation revoked. Signal invalid."
+          },
+          "expected_state": "RESOLVED_INVALID",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal permanently removed; terminal state"
+          }
+        }
+      ]
+    },
+    {
+      "id": "challenge_flow_03",
+      "title": "Multi-signal subject: one challenged, others unaffected",
+      "subject": {
+        "subject_type": "CreditClass",
+        "subject_id": "C01-001",
+        "category": "registry_quality"
+      },
+      "timeline": [
+        {
+          "step": 1,
+          "action": "submit_and_activate_signal_A",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "activation_time": "2026-03-02T01:00:00Z",
+          "event": {
+            "signal_label": "A",
+            "signaler_id": "signaler_C",
+            "endorsement_level": 5,
+            "stake": 200
+          },
+          "expected_active_signals": 1,
+          "expected_score": {
+            "reputation_score_0_1": 1.0,
+            "reason": "Single active signal at endorsement=5"
+          }
+        },
+        {
+          "step": 2,
+          "action": "submit_and_activate_signal_B",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "activation_time": "2026-03-02T01:00:00Z",
+          "event": {
+            "signal_label": "B",
+            "signaler_id": "signaler_D",
+            "endorsement_level": 3,
+            "stake": 200
+          },
+          "expected_active_signals": 2,
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Two signals: (5+3)/2 / 5 = 0.8 (equal decay)"
+          }
+        },
+        {
+          "step": 3,
+          "action": "challenge_signal_B",
+          "timestamp": "2026-03-05T00:00:00Z",
+          "event": {
+            "challenger_id": "challenger_Z",
+            "stake": 200,
+            "rationale": "Signal B based on incorrect methodology assessment.",
+            "evidence": {
+              "koi_links": ["koi://note/challenge-b"],
+              "ledger_refs": []
+            }
+          },
+          "expected_active_signals": 1,
+          "expected_score": {
+            "reputation_score_0_1": 1.0,
+            "reason": "Only signal A (endorsement=5) remains active; signal B paused"
+          }
+        },
+        {
+          "step": 4,
+          "action": "resolve_signal_B_valid",
+          "timestamp": "2026-03-10T00:00:00Z",
+          "event": {
+            "resolver": "admin",
+            "rationale": "Methodology assessment confirmed correct."
+          },
+          "expected_active_signals": 2,
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Both signals restored; score returns to ~0.8 (with minor decay adjustment)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "challenge_flow_04",
+      "title": "Timeout escalation: challenge unresolved past deadline triggers escalation",
+      "subject": {
+        "subject_type": "Methodology",
+        "subject_id": "METH-SoilCarbon-v3",
+        "category": "method_rigor"
+      },
+      "timeline": [
+        {
+          "step": 1,
+          "action": "submit_and_activate",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "activation_time": "2026-03-02T01:00:00Z",
+          "event": {
+            "signaler_id": "signaler_E",
+            "endorsement_level": 4,
+            "stake": 250
+          },
+          "expected_state": "ACTIVE",
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Active signal, endorsement_level=4"
+          }
+        },
+        {
+          "step": 2,
+          "action": "challenge",
+          "timestamp": "2026-03-05T00:00:00Z",
+          "event": {
+            "challenger_id": "challenger_W",
+            "stake": 250,
+            "rationale": "Methodology has known flaws in carbon sequestration measurement.",
+            "evidence": {
+              "koi_links": ["koi://note/methodology-flaw-report"],
+              "ledger_refs": ["ledger://tx/5001"]
+            }
+          },
+          "expected_state": "CHALLENGED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal paused during challenge"
+          }
+        },
+        {
+          "step": 3,
+          "action": "check_timeout_day_10",
+          "timestamp": "2026-03-15T00:00:00Z",
+          "event": {},
+          "expected_state": "CHALLENGED",
+          "expected_escalated": false,
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Still within 14-day resolution deadline; no escalation"
+          }
+        },
+        {
+          "step": 4,
+          "action": "check_timeout_day_15",
+          "timestamp": "2026-03-20T00:00:00Z",
+          "event": {},
+          "expected_state": "ESCALATED",
+          "expected_escalated": true,
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Resolution deadline exceeded; auto-escalated to governance. Score still paused."
+          }
+        },
+        {
+          "step": 5,
+          "action": "governance_resolve_valid",
+          "timestamp": "2026-03-25T00:00:00Z",
+          "event": {
+            "resolver": "governance",
+            "rationale": "Governance vote: methodology flaws are non-material. Signal valid."
+          },
+          "expected_state": "RESOLVED_VALID",
+          "expected_score": {
+            "reputation_score_0_1": 0.8,
+            "reason": "Signal restored by governance resolution; score contribution resumes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "challenge_flow_05",
+      "title": "Early challenge during SUBMITTED state prevents score impact entirely",
+      "subject": {
+        "subject_type": "Address",
+        "subject_id": "regen1earlytest",
+        "category": "operator_trust"
+      },
+      "timeline": [
+        {
+          "step": 1,
+          "action": "submit_signal",
+          "timestamp": "2026-03-01T00:00:00Z",
+          "event": {
+            "signaler_id": "signaler_F",
+            "endorsement_level": 5,
+            "stake": 200
+          },
+          "expected_state": "SUBMITTED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal not yet active; within activation delay"
+          }
+        },
+        {
+          "step": 2,
+          "action": "challenge_during_submitted",
+          "timestamp": "2026-03-01T12:00:00Z",
+          "event": {
+            "challenger_id": "challenger_V",
+            "stake": 200,
+            "rationale": "Address is associated with known fraudulent activity.",
+            "evidence": {
+              "koi_links": ["koi://note/fraud-evidence"],
+              "ledger_refs": ["ledger://tx/6001"]
+            }
+          },
+          "expected_state": "CHALLENGED",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal never contributed to score; challenged before activation"
+          }
+        },
+        {
+          "step": 3,
+          "action": "resolve_invalid",
+          "timestamp": "2026-03-05T00:00:00Z",
+          "event": {
+            "resolver": "admin",
+            "rationale": "Confirmed fraudulent address. Signal permanently invalid."
+          },
+          "expected_state": "RESOLVED_INVALID",
+          "expected_score": {
+            "reputation_score_0_1": 0.0,
+            "reason": "Signal permanently removed without ever having contributed to score"
+          }
+        }
+      ]
+    }
+  ]
+}
