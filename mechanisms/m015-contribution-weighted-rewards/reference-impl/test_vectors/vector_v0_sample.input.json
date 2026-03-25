@@ -1,0 +1,67 @@
+{
+  "description": "Single distribution period with 4 participants exercising different activity profiles",
+  "community_pool_inflow_uregen": 1000000000,
+  "periods_per_year": 52,
+  "max_stability_share": 0.30,
+  "stability_commitments": [
+    {
+      "holder_address": "regen1alice0example",
+      "committed_amount_uregen": 500000000,
+      "lock_period_months": 12
+    }
+  ],
+  "participants": [
+    {
+      "address": "regen1alice0example",
+      "label": "heavy buyer/retirer + stability tier",
+      "activities": {
+        "credit_purchase_value": 100000000,
+        "credit_retirement_value": 50000000,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 3,
+        "proposals": [
+          { "passed": true, "reached_quorum": true }
+        ]
+      }
+    },
+    {
+      "address": "regen1bob00example",
+      "label": "platform operator",
+      "activities": {
+        "credit_purchase_value": 20000000,
+        "credit_retirement_value": 0,
+        "platform_facilitation_value": 80000000,
+        "governance_votes_cast": 1,
+        "proposals": []
+      }
+    },
+    {
+      "address": "regen1carol0example",
+      "label": "governance-focused with mixed proposal outcomes",
+      "activities": {
+        "credit_purchase_value": 10000000,
+        "credit_retirement_value": 10000000,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 8,
+        "proposals": [
+          { "passed": true, "reached_quorum": true },
+          { "passed": false, "reached_quorum": true },
+          { "passed": false, "reached_quorum": false }
+        ]
+      }
+    },
+    {
+      "address": "regen1dave0example",
+      "label": "minimal participant — single small purchase + 1 vote",
+      "activities": {
+        "credit_purchase_value": 5000000,
+        "credit_retirement_value": 0,
+        "platform_facilitation_value": 0,
+        "governance_votes_cast": 1,
+        "proposals": [
+          { "passed": false, "reached_quorum": false }
+        ]
+      }
+    }
+  ]
+}

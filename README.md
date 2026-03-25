@@ -86,6 +86,7 @@ This repository contains the design specifications and implementation plans for 
 - [m013 — Value-Based Fee Routing (v0)](mechanisms/m013-value-based-fee-routing/)
 - [m014 — Authority Validator Governance (PoA Transition)](mechanisms/m014-authority-validator-governance/)
 - [m012 — Fixed Cap Dynamic Supply](mechanisms/m012-fixed-cap-dynamic-supply/)
+- [m015 — Contribution-Weighted Rewards](mechanisms/m015-contribution-weighted-rewards/)
 
 <!-- END MECHANISMS INDEX -->
 

@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m015 activity score output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "participant_address",
+    "epoch",
+    "total_score",
+    "breakdown"
+  ],
+  "properties": {
+    "participant_address": {
+      "type": "string",
+      "description": "Regen network address of the participant"
+    },
+    "epoch": {
+      "type": "string",
+      "description": "Epoch identifier (e.g., '2026-W07')"
+    },
+    "total_score": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Weighted sum of all activity contributions for this epoch"
+    },
+    "breakdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credit_purchase",
+        "credit_retirement",
+        "platform_facilitation",
+        "governance_voting",
+        "proposal_submission"
+      ],
+      "properties": {
+        "credit_purchase": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["raw_value", "weight", "weighted_value"],
+          "properties": {
+            "raw_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total credit purchase value in uregen"
+            },
+            "weight": {
+              "type": "number",
+              "const": 0.30
+            },
+            "weighted_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "raw_value * weight"
+            }
+          }
+        },
+        "credit_retirement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["raw_value", "weight", "weighted_value"],
+          "properties": {
+            "raw_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total credit retirement value in uregen"
+            },
+            "weight": {
+              "type": "number",
+              "const": 0.30
+            },
+            "weighted_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "raw_value * weight"
+            }
+          }
+        },
+        "platform_facilitation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["raw_value", "weight", "weighted_value"],
+          "properties": {
+            "raw_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Total platform facilitation value in uregen"
+            },
+            "weight": {
+              "type": "number",
+              "const": 0.20
+            },
+            "weighted_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "raw_value * weight"
+            }
+          }
+        },
+        "governance_voting": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["raw_value", "weight", "weighted_value"],
+          "properties": {
+            "raw_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Number of governance votes cast"
+            },
+            "weight": {
+              "type": "number",
+              "const": 0.10
+            },
+            "weighted_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "raw_value * weight"
+            }
+          }
+        },
+        "proposal_submission": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["raw_value", "weight", "weighted_value"],
+          "properties": {
+            "raw_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Effective proposal credit (1.0 per passed, 0.5 per quorum-but-failed, 0 per no-quorum)"
+            },
+            "weight": {
+              "type": "number",
+              "const": 0.10
+            },
+            "weighted_value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "raw_value * weight"
+            }
+          }
+        }
+      }
+    }
+  }
+}

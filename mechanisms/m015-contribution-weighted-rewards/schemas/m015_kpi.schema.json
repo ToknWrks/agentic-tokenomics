@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m015 KPI output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mechanism_id",
+    "scope",
+    "as_of",
+    "total_distributed_uregen",
+    "activity_pool_uregen",
+    "stability_pool_uregen",
+    "participant_count",
+    "avg_activity_score",
+    "stability_commitments_count"
+  ],
+  "properties": {
+    "mechanism_id": {
+      "const": "m015"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": "string",
+      "description": "ISO-8601 datetime with timezone",
+      "format": "date-time"
+    },
+    "total_distributed_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total uregen distributed in this period (activity + stability)"
+    },
+    "activity_pool_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Amount allocated to activity-based distribution in uregen"
+    },
+    "stability_pool_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Amount allocated to stability tier in uregen"
+    },
+    "participant_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of participants with non-zero activity scores"
+    },
+    "avg_activity_score": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Average activity score across all participants"
+    },
+    "stability_commitments_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of active stability tier commitments"
+    },
+    "community_pool_inflow_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total Community Pool inflow for this period in uregen"
+    },
+    "stability_cap_utilization": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction of 30% stability cap used (stability_pool / (inflow * 0.30))"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "description": "Expected outputs for vector_v0_sample — computed by m015_score.js reference implementation",
+  "stability_allocation_uregen": 576923,
+  "activity_pool_uregen": 999423077,
+  "participant_scores": [
+    {
+      "address": "regen1alice0example",
+      "total_score": 45000000.4
+    },
+    {
+      "address": "regen1bob00example",
+      "total_score": 22000000.1
+    },
+    {
+      "address": "regen1carol0example",
+      "total_score": 6000000.95
+    },
+    {
+      "address": "regen1dave0example",
+      "total_score": 1500000.1
+    }
+  ],
+  "distribution": [
+    {
+      "address": "regen1alice0example",
+      "reward": 603678362,
+      "share": 0.604027
+    },
+    {
+      "address": "regen1bob00example",
+      "reward": 295131642,
+      "share": 0.295302
+    },
+    {
+      "address": "regen1carol0example",
+      "reward": 80490460,
+      "share": 0.080537
+    },
+    {
+      "address": "regen1dave0example",
+      "reward": 20122613,
+      "share": 0.020134
+    }
+  ]
+}
