@@ -6,19 +6,23 @@ Design specifications and implementation plans for Regen Network's 65-75% automa
 
 **Repo**: https://github.com/regen-network/agentic-tokenomics
 **Access tier**: public
-**Status**: Phase 1-2 complete (discovery + specification). Phase 3-5 in active PR pipeline.
+**Status**: All 5 phases specified. 9 mechanism specs landed. 0 open PRs. Agent reference implementations present.
 
 ## Repository Structure
 
 ```
-phase-1/          — Discovery & analysis (complete)
-phase-2/          — Mechanism design & specification (complete)
-phase-3/          — Implementation & testing specs
-mechanisms/       — Landed mechanism specs (currently only m010)
-docs/             — Architecture, governance, contributor guides
-schemas/          — JSON schemas for mechanism validation
-scripts/          — Tooling (verify.mjs, build-mechanism-index.mjs)
-.local/           — Gitignored local context (see below)
+mechanisms/              — 9 mechanism specs (M001-ENH, M008-M015), each with SPEC/datasets/schemas/reference-impl
+phase-1/                 — Discovery & analysis (complete)
+phase-2/                 — Mechanism design & specification (complete)
+phase-3/                 — Implementation specs, contract architecture, agent runtime, testing
+phase-4/                 — Deployment plans, migration runbooks, community onboarding
+phase-5/                 — Operations, monitoring, evolution governance
+agents/                  — ElizaOS agent scaffold (monorepo with plugins, tests, Docker)
+agent-002-governance-analyst/  — Standalone AGENT-002 reference implementation (TypeScript)
+docs/                    — Architecture, economics, governance, integration, learning
+schemas/                 — Shared JSON schemas
+scripts/                 — Verification and index tooling
+.local/                  — Gitignored local context (see below)
 ```
 
 ## Mechanism Index
@@ -26,19 +30,19 @@ scripts/          — Tooling (verify.mjs, build-mechanism-index.mjs)
 ### Token Utility Mechanisms (Phase 2)
 | ID | Name | Status | Spec Location |
 |----|------|--------|--------------|
-| M001-ENH | Dual-Track Voting (Credit Class Approval) | Open PR #19 | phase-2/2.1 |
-| M008 | Data Attestation Bonding | Open PR #20 | phase-2/2.1 |
-| M009 | Service Provision Escrow | Open PR #21 | phase-2/2.1 |
+| M001-ENH | Dual-Track Voting (Credit Class Approval) | Merged | mechanisms/m001-enh-credit-class-approval/ |
+| M008 | Data Attestation Bonding | Merged | mechanisms/m008-attestation-bonding/ |
+| M009 | Service Provision Escrow | Merged | mechanisms/m009-service-escrow/ |
 | M010 | Reputation/Legitimacy Signaling | Merged | mechanisms/m010-reputation-signal/ |
-| M011 | Marketplace Curation & Quality Signals | Open PR #22 | phase-2/2.1 |
+| M011 | Marketplace Curation & Quality Signals | Merged | mechanisms/m011-marketplace-curation/ |
 
 ### Economic Reboot Mechanisms (PoA Transition)
 | ID | Name | Status | Spec Location | Related Work |
 |----|------|--------|--------------|--------------|
-| M012 | Fixed Cap Dynamic Supply | Open PR #25 | phase-2/2.6 | poa-migration OQs |
-| M013 | Value-Based Fee Routing | Open PR #23 | phase-2/2.6 | **fee-router/** (CosmWasm impl) |
-| M014 | Authority Validator Governance | Open PR #24 | phase-2/2.6 | poa-migration bioregional framework |
-| M015 | Contribution-Weighted Rewards | Open PR #26 | phase-2/2.6 | poa-migration OQs |
+| M012 | Fixed Cap Dynamic Supply | Merged | mechanisms/m012-fixed-cap-dynamic-supply/ | poa-migration OQs |
+| M013 | Value-Based Fee Routing | Merged | mechanisms/m013-value-based-fee-routing/ | **fee-router/** (CosmWasm impl) |
+| M014 | Authority Validator Governance | Merged | mechanisms/m014-authority-validator-governance/ | poa-migration bioregional framework |
+| M015 | Contribution-Weighted Rewards | Merged | mechanisms/m015-contribution-weighted-rewards/ | poa-migration OQs |
 
 ## Cross-References (Load on Demand)
 
@@ -80,16 +84,13 @@ Three parallel LLM analyses of Regen's economic state (Feb 2026):
 ### Workspace Archive (.local/workspace-archive/)
 Original tokenomics workspace content (pre-consolidation). Includes early PR drafts that map to the current open PR pipeline.
 
-## PR Pipeline Overview
+## PR History
 
-**31 open PRs** across several categories:
-
-### Mechanism Specs (CShear, #19-26) — Individual mechanism specifications
-### Schema/Tooling (brawlaphant, #28-31) — Schema hardening and verification
-### PoA Integration (glandua, #32-35) — Cosmos x/poa, bioregional validators, SDK migration
-### M013 Architecture (#36) — CosmWasm contract architecture for fee routing
-### Phase 3-5 Specs (brawlaphant, #37-44) — Implementation, deployment, operations specs
-### Agent Implementation (#15-18) — Agent scaffolds, PoCs, feasibility reviews
+All PRs merged as of 2026-03-25. Key contributions:
+- **CShear**: Mechanism specs M001-ENH through M015 (#19-26)
+- **brawlaphant**: Schema hardening, Phase 3-5 specs, simulation models, OQ resolution (#28-31, #37-57)
+- **glandua**: PoA integration docs, agent implementations, M013 architecture (#15, #17, #32-36)
+- **Eco-Wealth**: Agent PoC exploration (#18, closed)
 
 ## Governance Layers
 

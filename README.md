@@ -55,21 +55,23 @@ This repository contains the design specifications and implementation plans for 
 - Data schema & integration specification
 - Economic Reboot mechanism specifications (4 protocols)
 
-### Phase 3: Implementation & Testing (Planned)
-- Smart contract development
-- Agent implementation
-- Integration testing
-- Security audits
+### Phase 3: Implementation & Testing ✅ (Specified)
+- M012-M015 smart contract specs ([3.1](phase-3/3.1-smart-contract-specs.md))
+- Agent workflows & PoA conditional logic ([3.2](phase-3/3.2-agent-implementation.md))
+- Testing & security framework ([3.3](phase-3/3.3-testing-plan.md), [3.4](phase-3/3.4-security-framework.md))
+- M013 CosmWasm architecture ([contract spec](phase-3/m013-contract-architecture.md), [integration tests](phase-3/m013-integration-tests.md))
+- Agent orchestration runtime ([3.6](phase-3/3.6-agent-orchestration-runtime.md))
+- KOI knowledge graph integration ([3.7](phase-3/3.7-koi-knowledge-graph-integration.md))
+- ElizaOS reference implementation ([3.8](phase-3/3.8-elizaos-reference-implementation.md))
 
-### Phase 4: Deployment & Migration (Planned)
-- Testnet deployment
-- Mainnet migration
-- Community onboarding
+### Phase 4: Deployment & Migration ✅ (Specified)
+- Testnet deployment plan ([4.1](phase-4/4.1-testnet-deployment.md))
+- Mainnet migration & PoS→PoA runbook ([4.2](phase-4/4.2-mainnet-migration.md))
+- Community onboarding guide ([4.3](phase-4/4.3-community-onboarding.md))
 
-### Phase 5: Operations & Evolution (Planned)
-- Monitoring & maintenance
-- Continuous improvement
-- Community governance handoff
+### Phase 5: Operations & Evolution ✅ (Specified)
+- Monitoring & incident response ([5.1](phase-5/5.1-monitoring-operations.md))
+- Evolution governance & OQ tracker ([5.2](phase-5/5.2-evolution-governance.md))
 
 ## Key Specifications
 
@@ -83,9 +85,9 @@ This repository contains the design specifications and implementation plans for 
 - [m009 — Service Provision Escrow](mechanisms/m009-service-escrow/)
 - [m010 — Reputation Signal (v0 advisory)](mechanisms/m010-reputation-signal/)
 - [m011 — Marketplace Curation & Quality Signals](mechanisms/m011-marketplace-curation/)
+- [m012 — Fixed Cap Dynamic Supply](mechanisms/m012-fixed-cap-dynamic-supply/)
 - [m013 — Value-Based Fee Routing (v0)](mechanisms/m013-value-based-fee-routing/)
 - [m014 — Authority Validator Governance (PoA Transition)](mechanisms/m014-authority-validator-governance/)
-- [m012 — Fixed Cap Dynamic Supply](mechanisms/m012-fixed-cap-dynamic-supply/)
 - [m015 — Contribution-Weighted Rewards](mechanisms/m015-contribution-weighted-rewards/)
 
 <!-- END MECHANISMS INDEX -->
@@ -132,55 +134,24 @@ Based on Regen Network mainnet (as of analysis):
 ## Repository Structure
 
 ```
-regen-agentic-tokenomics/
-├── README.md
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── package.json
-├── WG_BULK_PACK.md
+agentic-tokenomics/
+├── mechanisms/              — 9 mechanism specs (M001-ENH, M008-M015)
+│   └── m0XX-*/SPEC.md      — Each has SPEC, datasets, schemas, reference-impl
+├── phase-1/                 — Discovery & analysis (complete)
+├── phase-2/                 — Mechanism design & specification (complete)
+├── phase-3/                 — Implementation specs, contract architecture, testing
+├── phase-4/                 — Deployment plans, migration runbooks, onboarding
+├── phase-5/                 — Operations, monitoring, evolution governance
+├── agents/                  — ElizaOS agent scaffold (monorepo, Docker, tests)
+├── agent-002-governance-analyst/  — Standalone AGENT-002 reference implementation
 ├── docs/
-│   ├── CONTRIBUTOR_NAV.md
-│   ├── DEPENDENCIES.md
-│   ├── MECHANISM_CONSUMERS.md
-│   ├── MECHANISM_INDEX.md
-│   ├── RELEASE.md
-│   ├── architecture/
-│   │   ├── STACK_MAP.md
-│   │   └── STACK_MAP.mmd
-│   ├── contributor-guide/
-│   └── governance/
-├── mechanisms/
-│   └── m010-reputation-signal/
-│       ├── SPEC.md
-│       ├── README.md
-│       ├── datasets/
-│       ├── reference-impl/
-│       └── schemas/
-├── phase-1/
-│   ├── README.md
-│   ├── 1.1-stakeholder-value-flow.md
-│   ├── 1.2-tokenomic-mechanisms.md
-│   ├── 1.3-agentic-services.md
-│   ├── 1.4-governance-architecture.md
-│   └── 1.5-system-architecture.md
-├── phase-2/
-│   ├── README.md
-│   ├── 2.1-token-utility-mechanisms.md
-│   ├── 2.2-agentic-workflows.md
-│   ├── 2.3-governance-processes.md
-│   ├── 2.4-agent-orchestration.md
-│   ├── 2.5-data-schema-integration.md
-│   └── 2.6-economic-reboot-mechanisms.md
-├── phase-3/
-│   ├── README.md
-│   ├── 3.1-smart-contract-specs.md
-│   ├── 3.2-agent-implementation.md
-│   ├── 3.3-testing-plan.md
-│   ├── 3.4-security-framework.md
-│   └── 3.5-technical-docs.md
-└── scripts/
-    ├── verify.mjs
-    └── build-mechanism-index.mjs
+│   ├── architecture/        — Stack map, dependencies
+│   ├── economics/           — Token economics synthesis, simulation spec
+│   ├── governance/          — Validator selection, OQ resolution, proposals
+│   ├── integration/         — Claims engine, CosmWasm work packages
+│   └── learning/            — Continuous learning, contributor paths
+├── schemas/                 — Shared JSON schemas
+└── scripts/                 — Verification and index tooling
 ```
 
 ## Ecosystem
