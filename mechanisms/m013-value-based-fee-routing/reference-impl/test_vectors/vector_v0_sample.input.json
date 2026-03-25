@@ -1,0 +1,55 @@
+{
+  "as_of": "2026-02-18T12:00:00Z",
+  "fee_config": {
+    "fee_rates": {
+      "CreditIssuance": 0.02,
+      "CreditTransfer": 0.001,
+      "CreditRetirement": 0.005,
+      "MarketplaceTrade": 0.01
+    },
+    "distribution_shares": {
+      "burn": 0.30,
+      "validator": 0.40,
+      "community": 0.25,
+      "agent": 0.05
+    },
+    "min_fee_uregen": 1000000
+  },
+  "fee_events": [
+    {
+      "tx_hash": "tx_issuance_001",
+      "tx_type": "CreditIssuance",
+      "timestamp": "2026-02-18T08:00:00Z",
+      "value_uregen": 5000000000,
+      "payer": "regen1issuer001"
+    },
+    {
+      "tx_hash": "tx_transfer_001",
+      "tx_type": "CreditTransfer",
+      "timestamp": "2026-02-18T09:00:00Z",
+      "value_uregen": 100000000,
+      "payer": "regen1sender001"
+    },
+    {
+      "tx_hash": "tx_retire_001",
+      "tx_type": "CreditRetirement",
+      "timestamp": "2026-02-18T10:00:00Z",
+      "value_uregen": 1000000000,
+      "payer": "regen1retiree001"
+    },
+    {
+      "tx_hash": "tx_market_001",
+      "tx_type": "MarketplaceTrade",
+      "timestamp": "2026-02-18T10:30:00Z",
+      "value_uregen": 2500000000,
+      "payer": "regen1buyer001"
+    },
+    {
+      "tx_hash": "tx_transfer_002",
+      "tx_type": "CreditTransfer",
+      "timestamp": "2026-02-18T11:00:00Z",
+      "value_uregen": 500000,
+      "payer": "regen1sender002"
+    }
+  ]
+}

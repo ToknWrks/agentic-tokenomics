@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m013 fee configuration",
+  "description": "Fee configuration for the value-based fee router: rates by transaction type and distribution shares.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fee_rates",
+    "distribution_shares",
+    "min_fee_uregen"
+  ],
+  "properties": {
+    "fee_rates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "CreditIssuance",
+        "CreditTransfer",
+        "CreditRetirement",
+        "MarketplaceTrade"
+      ],
+      "properties": {
+        "CreditIssuance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.10,
+          "description": "Fee rate for credit issuance (MsgCreateBatch)"
+        },
+        "CreditTransfer": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.10,
+          "description": "Fee rate for credit transfer (MsgSend)"
+        },
+        "CreditRetirement": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.10,
+          "description": "Fee rate for credit retirement (MsgRetire)"
+        },
+        "MarketplaceTrade": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.10,
+          "description": "Fee rate for marketplace trade (MsgBuySellOrder)"
+        }
+      }
+    },
+    "distribution_shares": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "burn",
+        "validator",
+        "community",
+        "agent"
+      ],
+      "properties": {
+        "burn": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.0,
+          "description": "Share routed to burn pool"
+        },
+        "validator": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.0,
+          "description": "Share routed to validator fund"
+        },
+        "community": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.0,
+          "description": "Share routed to community pool"
+        },
+        "agent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.0,
+          "description": "Share routed to agent infrastructure fund"
+        }
+      },
+      "description": "Distribution shares must sum to 1.0 (Share Sum Unity invariant)"
+    },
+    "min_fee_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Minimum fee floor in uregen (1 REGEN = 1,000,000 uregen)"
+    }
+  }
+}

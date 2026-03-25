@@ -38,11 +38,29 @@ requireFile("mechanisms/m010-reputation-signal/datasets/fixtures/v0_sample.json"
 // Mechanism index check
 run("node", ["scripts/build-mechanism-index.mjs", "--check"]);
 
-// Basic schema sanity
+// m013 core files
+requireFile("mechanisms/m013-value-based-fee-routing/SPEC.md");
+requireFile("mechanisms/m013-value-based-fee-routing/README.md");
+requireFile("mechanisms/m013-value-based-fee-routing/schemas/m013_kpi.schema.json");
+requireFile("mechanisms/m013-value-based-fee-routing/schemas/m013_fee_event.schema.json");
+requireFile("mechanisms/m013-value-based-fee-routing/schemas/m013_fee_config.schema.json");
+requireFile("mechanisms/m013-value-based-fee-routing/datasets/fixtures/v0_sample.json");
+
+// Basic schema sanity — m010
 const kpiSchema = readJson("mechanisms/m010-reputation-signal/schemas/m010_kpi.schema.json");
 if (!kpiSchema.required || !kpiSchema.required.includes("mechanism_id")) {
-  console.error("KPI schema missing required fields.");
+  console.error("m010 KPI schema missing required fields.");
   process.exit(4);
 }
+
+// Basic schema sanity — m013
+const m013KpiSchema = readJson("mechanisms/m013-value-based-fee-routing/schemas/m013_kpi.schema.json");
+if (!m013KpiSchema.required || !m013KpiSchema.required.includes("mechanism_id")) {
+  console.error("m013 KPI schema missing required fields.");
+  process.exit(4);
+}
+
+// m013 self-test
+run("node", ["mechanisms/m013-value-based-fee-routing/reference-impl/m013_fee.js"]);
 
 console.log("agentic-tokenomics verify: PASS");

@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "m013 KPI output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mechanism_id",
+    "scope",
+    "as_of",
+    "total_fees_uregen",
+    "fee_events_count",
+    "fees_by_type",
+    "distribution_by_pool",
+    "avg_fee_rate"
+  ],
+  "properties": {
+    "mechanism_id": {
+      "const": "m013"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": "string",
+      "description": "ISO-8601 datetime with timezone (e.g., 2026-02-18T12:00:00Z)",
+      "format": "date-time"
+    },
+    "total_fees_uregen": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total fees collected across all events (uregen)"
+    },
+    "fee_events_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of fee events in the period"
+    },
+    "fees_by_type": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CreditIssuance": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total fees from credit issuance (uregen)"
+        },
+        "CreditTransfer": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total fees from credit transfers (uregen)"
+        },
+        "CreditRetirement": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total fees from credit retirements (uregen)"
+        },
+        "MarketplaceTrade": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total fees from marketplace trades (uregen)"
+        }
+      },
+      "description": "Fee totals broken down by transaction type"
+    },
+    "distribution_by_pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "burn",
+        "validator",
+        "community",
+        "agent"
+      ],
+      "properties": {
+        "burn": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total distributed to burn pool (uregen)"
+        },
+        "validator": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total distributed to validator fund (uregen)"
+        },
+        "community": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total distributed to community pool (uregen)"
+        },
+        "agent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total distributed to agent infrastructure fund (uregen)"
+        }
+      },
+      "description": "Fee distribution totals by pool"
+    },
+    "avg_fee_rate": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Average effective fee rate across all events (total_fees / total_value)"
+    },
+    "min_fee_applied_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of events where min_fee floor was applied"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

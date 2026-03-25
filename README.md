@@ -83,6 +83,7 @@ This repository contains the design specifications and implementation plans for 
 - [m009 — Service Provision Escrow](mechanisms/m009-service-escrow/)
 - [m010 — Reputation Signal (v0 advisory)](mechanisms/m010-reputation-signal/)
 - [m011 — Marketplace Curation & Quality Signals](mechanisms/m011-marketplace-curation/)
+- [m013 — Value-Based Fee Routing (v0)](mechanisms/m013-value-based-fee-routing/)
 
 <!-- END MECHANISMS INDEX -->
 
