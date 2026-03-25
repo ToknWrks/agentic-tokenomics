@@ -85,6 +85,7 @@ This repository contains the design specifications and implementation plans for 
 - [m011 — Marketplace Curation & Quality Signals](mechanisms/m011-marketplace-curation/)
 - [m013 — Value-Based Fee Routing (v0)](mechanisms/m013-value-based-fee-routing/)
 - [m014 — Authority Validator Governance (PoA Transition)](mechanisms/m014-authority-validator-governance/)
+- [m012 — Fixed Cap Dynamic Supply](mechanisms/m012-fixed-cap-dynamic-supply/)
 
 <!-- END MECHANISMS INDEX -->
 

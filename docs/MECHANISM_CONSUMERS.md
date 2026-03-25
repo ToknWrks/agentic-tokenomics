@@ -123,3 +123,22 @@ This document maps **mechanism IDs** to known **consumers** (agents, digests, sc
 - AGENT-004: Validator Monitor (performance tracking, probation recommendations)
 - Heartbeat character: `validator-monitor-agent` (regen-heartbeat, planned)
 - M013 integration: validator fund balance feeds compensation computation
+## m012 — Fixed Cap Dynamic Supply
+**Canonical spec**
+- `mechanisms/m012-fixed-cap-dynamic-supply/SPEC.md`
+
+**Outputs**
+- KPI JSON block schema: `mechanisms/m012-fixed-cap-dynamic-supply/schemas/m012_kpi.schema.json`
+- Supply state schema: `mechanisms/m012-fixed-cap-dynamic-supply/schemas/m012_supply_state.schema.json`
+- Period record schema: `mechanisms/m012-fixed-cap-dynamic-supply/schemas/m012_period_record.schema.json`
+
+**Reference implementation**
+- Supply period computation: `mechanisms/m012-fixed-cap-dynamic-supply/reference-impl/m012_supply.js` (`computeSupplyPeriod`)
+- KPI computation: `mechanisms/m012-fixed-cap-dynamic-supply/reference-impl/m012_kpi.js` (`computeM012KPI`)
+
+**Datasets (deterministic)**
+- Replay fixtures: `mechanisms/m012-fixed-cap-dynamic-supply/datasets/fixtures/v0_sample.json`
+- Equilibrium fixtures: `mechanisms/m012-fixed-cap-dynamic-supply/datasets/fixtures/v0_equilibrium_sample.json`
+
+**Known consumers**
+- Reference self-test: `node mechanisms/m012-fixed-cap-dynamic-supply/reference-impl/m012_supply.js`
