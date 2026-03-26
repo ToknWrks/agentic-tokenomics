@@ -93,7 +93,7 @@ At current REGEN price (~$0.0013) and realistic near-term volumes:
 
 *Fee range reflects 0.5% (retirement) to 3% (issuance). Burn assumes full conversion via Osmosis.*
 
-At $10K/week in credit volume — a realistic near-term target — the network burns roughly **560K–3.36M REGEN/year** (~0.17–1.05% of the 321M hard cap). Modest today, meaningful at scale, and directionally correct from day one.
+At $10K/week in credit volume — a realistic near-term target — the network burns roughly **560K–3.36M REGEN/year** (~0.25–1.52% of the 221M hard cap). Modest today, meaningful at scale, and directionally correct from day one.
 
 ---
 
@@ -101,7 +101,7 @@ At $10K/week in credit volume — a realistic near-term target — the network b
 
 With buy-and-burn as the primary supply mechanism, M012's minting formula becomes secondary. We recommend:
 
-- **Hard cap: 321M REGEN** (headroom above current total supply of ~229M to allow staking rewards to continue through the transition period, after which minting stops permanently)
+- **Hard cap: 221M REGEN** (aligns with WG consensus; set below current total supply of ~229M, requiring a one-time burn of ~8M REGEN at proposal passage — holding existing burn commitments accountable)
 - **Minting: minimal or zero** — supply only moves downward through burn
 - **Ecological incentives: funded from Community Pool (M015)**, not new minting
 
@@ -159,7 +159,7 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 | OQ-M013-3 (collection) | Hybrid: collect in native denom (USDC), auto-convert burn share to REGEN via Osmosis |
 | OQ-M013-3 (distribution) | Burn Pool: REGEN only. Validators: choice. Community Pool: REGEN with 5% bonus option. Agent Infra: USDC, governance-directed |
 | OQ-M013-5 (burn share) | 28% burn, implemented as buy-and-burn — aligns with upstream OQ-M013-1 resolution |
-| OQ-M012-1 (hard cap) | 321M — headroom above current ~229M total supply to complete staking reward transition, then permanent ceiling |
+| OQ-M012-1 (hard cap) | 221M — aligns with WG consensus; requires ~8M REGEN burned at passage to bring supply below cap |
 
 ---
 
@@ -181,4 +181,4 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 1. WG discussion in Discord #agentic-governance
 2. Forum post at forum.regen.network for broader community input
 3. If consensus reached: PR to update `phase-2/2.6-economic-reboot-mechanisms.md` resolving OQ-M013-3 and OQ-M013-5
-4. Follow-on PR to update M012 spec with simplified supply cap (321M hard cap, burn-only after transition)
+4. Follow-on PR to update M012 spec with hard cap of 221M and required one-time burn at passage
