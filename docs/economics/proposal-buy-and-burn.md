@@ -86,14 +86,14 @@ Transaction fee collected (USDC)
     ├── 25% → Community Pool → M015 activity rewards
     │         └── distributed in REGEN (converted at claim time)
     │
-    └── 5%  → Agent Infrastructure Fund (USDC for operational stability)
+    └── 5%  → Agent Infrastructure Fund (governance-directed; open to any qualifying AI agent infrastructure provider)
 ```
 
 **On distribution denomination (OQ-M013-3, distribution side):**
 - Burn Pool: always converted to REGEN (required for burn)
 - Validator Fund: recipient choice — USDC for operational stability or REGEN for governance weight
 - Community Pool / M015: converted to REGEN at claim time, with optional 5% bonus for recipients who choose REGEN over USDC
-- Agent Infrastructure: USDC (agents need operational stability, not governance weight)
+- Agent Infrastructure: USDC preferred (operational stability); allocation governed via Community Pool spending proposals — open to any qualifying AI agent infrastructure provider, not designated to a single operator (resolves OQ-M013-4 in favor of governance-directed model)
 
 ---
 
@@ -165,7 +165,7 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 | Open Question | Recommended Resolution |
 |---|---|
 | OQ-M013-3 (collection) | Hybrid: collect in native denom (USDC), auto-convert burn share to REGEN via Osmosis |
-| OQ-M013-3 (distribution) | Burn Pool: REGEN only. Validators: choice. Community Pool: REGEN with 5% bonus option. Agent Infra: USDC |
+| OQ-M013-3 (distribution) | Burn Pool: REGEN only. Validators: choice. Community Pool: REGEN with 5% bonus option. Agent Infra: USDC, governance-directed |
 | OQ-M013-5 (burn share) | Option A — maintain burn at 30-40%, implemented as buy-and-burn |
 | OQ-M012-1 (hard cap) | 321M — headroom above current ~229M total supply to complete staking reward transition, then permanent ceiling |
 
