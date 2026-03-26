@@ -54,24 +54,6 @@ Regeneration and token appreciation are the same transaction.
 
 ---
 
-## Alignment with Regen Compute
-
-Regen Compute (compute.regen.network) is driving credit retirements from AI developers. Every retirement via the API:
-
-```
-AI session ends
-→ POST /api/v1/retire called
-→ 0.5% retirement fee collected in USDC
-→ 30-40% of fee routes to Burn Pool
-→ USDC used to buy REGEN on Osmosis
-→ REGEN permanently burned
-→ Supply contracts
-```
-
-This creates a direct flywheel: AI compute growth → ecological credit demand → REGEN buy pressure → token appreciation → more capital into Regen ecosystem → more credit projects funded → more retirements → more burn.
-
----
-
 ## Proposed Fee Flow
 
 ```
