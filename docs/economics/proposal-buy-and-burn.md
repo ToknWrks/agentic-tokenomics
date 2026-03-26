@@ -144,7 +144,7 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 
 ## Implementation Notes
 
-**DEX routing**: Osmosis is the natural venue — REGEN/USDC liquidity exists there, and the swap can be executed atomically via IBC. Slippage protection parameters should be set conservatively given current low liquidity.
+**DEX routing (primary)**: Osmosis is the primary venue — REGEN/USDC liquidity exists there, and the swap can be executed atomically via IBC. Slippage protection parameters should be set conservatively given current low liquidity.
 
 **Osmosis liquidity risk**: REGEN/USDC liquidity on Osmosis is currently thin. At low weekly volumes ($1K–$10K), slippage could consume a meaningful portion of the burn value, reducing effectiveness. Mitigations:
 - Set a minimum weekly accumulation threshold (e.g., $500 USDC) before executing a swap — below this, accumulate to the next epoch
@@ -152,11 +152,20 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 - As credit market volume grows, slippage becomes proportionally less significant
 - Long-term: deeper REGEN/USDC liquidity is a natural consequence of the buy pressure this mechanism generates — the mechanism is self-reinforcing over time
 
+**Fallback: on-chain burn auction (in case of Osmosis failure)**: If Osmosis becomes unavailable or slippage exceeds acceptable thresholds indefinitely, a CosmWasm burn auction module deployed on Regen chain activates as the fallback:
+- Accumulated USDC (Noble USDC via IBC, preferred over axlUSDC to avoid bridge risk) is posted as a standing buy order for REGEN at oracle price
+- Oracle price derived from a 24–48hr TWAP sourced from the deepest available non-Osmosis venue (currently Uniswap V3 on Base or Hydra DEX) — TWAP window prevents short-term price manipulation
+- Any market participant can fill the order by sending REGEN to the module; REGEN received is immediately burned
+- Unfilled USDC rolls to the next epoch
+- This preserves real buy pressure (open market participants are paid to bring REGEN for burning) without DEX dependency
+
+**Cosmos Hub extensibility**: The burn auction contract is designed to be chain-agnostic — it accepts any IBC USDC denomination and routes burns back to Regen chain via IBC. This makes future deployment on Cosmos Hub or any CosmWasm-enabled chain in the Cosmos ecosystem straightforward, enabling tap into broader liquidity and visibility as the network grows.
+
 **Burn address**: Cosmos SDK `x/bank` module supports sending to a burn address (`regen1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqnrums9`). Burned tokens are provably gone — verifiable on-chain.
 
 **Frequency**: Weekly epoch aligns with M012's proposed period cadence. Accumulate fees for 7 days, execute single batch buy-and-burn. Reduces gas overhead and DEX impact vs. per-transaction burns.
 
-**Oracle dependency**: None — this mechanism requires no price oracle. USDC is stable by definition; REGEN price is discovered at swap time on Osmosis.
+**Oracle dependency**: Primary (Osmosis) path requires no price oracle — REGEN price is discovered at swap time. The fallback burn auction introduces an oracle dependency; a TWAP sourced from the primary trading venue (currently Uniswap V3 / Hydra DEX) mitigates manipulation risk.
 
 ---
 
