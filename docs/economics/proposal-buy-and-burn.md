@@ -101,7 +101,7 @@ At $10K/week in credit volume — a realistic near-term target — the network b
 
 With buy-and-burn as the primary supply mechanism, M012's minting formula becomes secondary. We recommend:
 
-- **Hard cap: 221M REGEN** (aligns with WG consensus; set below current total supply of ~229M, requiring a one-time burn of ~8M REGEN at proposal passage — holding existing burn commitments accountable)
+- **Hard cap: 221M REGEN** (aligns with WG consensus; note: current total supply is ~229M, so passage would require supply to be reduced to the cap — approximately 8M REGEN burned at or before activation)
 - **Minting: minimal or zero** — supply only moves downward through burn
 - **Ecological incentives: funded from Community Pool (M015)**, not new minting
 
@@ -159,7 +159,7 @@ Buy-and-burn is the most credible mechanism for aligning speculative interest wi
 | OQ-M013-3 (collection) | Hybrid: collect in native denom (USDC), auto-convert burn share to REGEN via Osmosis |
 | OQ-M013-3 (distribution) | Burn Pool: REGEN only. Validators: choice. Community Pool: REGEN with 5% bonus option. Agent Infra: USDC, governance-directed |
 | OQ-M013-5 (burn share) | 28% burn, implemented as buy-and-burn — aligns with upstream OQ-M013-1 resolution |
-| OQ-M012-1 (hard cap) | 221M — aligns with WG consensus; requires ~8M REGEN burned at passage to bring supply below cap |
+| OQ-M012-1 (hard cap) | 221M — aligns with WG consensus; current supply (~229M) exceeds this, requiring ~8M REGEN burned at or before activation |
 
 ---
 
